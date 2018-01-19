@@ -1,0 +1,366 @@
+body {
+    margin: 0px;
+}
+
+body p {
+    font-family: Roboto, sans-serif;
+    font-size: 15px;
+}
+
+.wrapper-home {
+    background-color: #e6e8f0;
+}
+
+.wrapper-login {
+    resize: both;
+    position: relative;
+    background:  #e6e8f0;
+    height: 100vh;
+    width: 100vw;
+}
+#header {
+    margin-bottom: 15px;
+    margin-top: 2px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#account {
+    float: right!important;
+}
+
+#wrapper #body {
+    margin-bottom: 10px;
+}
+
+#footer {
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: rgb(255, 221, 0);
+}
+
+#map {
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+    border-radius: 8px 8px 8px 8px;
+    width: 75vw;
+    height: 80vh;
+    background-color: white;
+    border: 2px solid rgb(255, 191, 0);
+}
+
+#mapinfo {
+    position: relative;
+    display: inline-block;
+    margin-right: 5px;
+    float: right;
+    border-radius: 8px 8px 8px 8px;
+    width: 20vw;
+    height: 80vh;
+    background-color: white;
+    border: 2px solid rgb(255, 191, 0);
+}
+
+#logo {
+    display: inline-block;
+    margin: 5px;
+}
+
+#logo img {
+    width: 20%;
+    height: 20%;
+    background-color: white;
+    padding: 2px;
+    border-radius: 8px;
+}
+
+#bar {
+    background-color: rgb(255, 191, 0);
+    height: 5px;
+    border-radius: 8px 8px 0px 0px;
+    margin-bottom: 3px;
+}
+
+#inner {
+    background-color: rgb(255, 221, 0);
+}
+
+.login {
+    position: relative;
+    width: 465px;
+    height: auto;
+    background-color: #fff;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center center;
+}
+
+.login p {
+    margin: 0 0 9px;
+}
+
+#login-header {
+    padding: 25px 40px 0;
+    text-align: center;
+}
+
+.login i {
+    position: absolute;
+    content: "";
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#login-icon {
+    background-image: url(https://upload.wikimedia.org/wikipedia/en/thumb/e/e9/UI_Logo.svg/1024px-UI_Logo.svg.png);
+    top: 10px;
+    left: 9px;
+    width: 100px;
+    height: 100px;
+}
+
+#title {
+    position: relative;
+    font-weight: 300;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-family: "Nunito Sans", sans-serif;
+    color: rgb(255, 191, 0);
+    text-align: center;
+    display: inline-block;
+}
+
+#login-body {
+    padding: 15px 40px 0px 40px;
+    max-height: none;
+    overflow: visible;
+}
+
+#login-body .form-group {
+    position: relative;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    font-size: 13px;
+    color: #555;
+    background-color: #eee;
+    background-image: none;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.form-control:focus {
+    background: #fff;
+    border-color: rgb(255, 191, 0);
+    outline: 0
+}
+
+.login #login-body .form-group .form-control {
+    height: 23px;
+    line-height: 34px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#login-footer {
+    padding: 0px 0px 30px 40px;
+}
+
+.checkbox-button {
+    float: left;
+    display: inline-block;
+    font-family: Roboto, sans-serif;
+    font-size: 15px;
+}
+
+#login-footer input[type="checkbox" i] {
+    margin: 0px 3px 3px 1px;
+}
+
+#toggle-switch input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+
+label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 75px;
+    height: 30px;
+    background: grey;
+    display: inline-block;
+    border-radius: 100px;
+    position: relative;
+}
+
+label:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 26px;
+    height: 20px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+}
+
+input:checked+label {
+    background: #bada55;
+}
+
+input:checked+label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+}
+
+label:active:after {
+    width: 40px;
+}
+
+#login-body .submitbtn {
+    width: 100%;
+    font-weight: 500;
+    font-family: Roboto, sans-serif;
+    color: #fff;
+    background-color: rgb(255, 191, 0);
+    border-color: rgb(255, 191, 0);
+    padding: 5px 15px;
+    font-size: 15px;
+    line-height: 1.33333;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+#cssmenu,
+#cssmenu ul,
+#cssmenu ul li,
+#cssmenu ul li a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+    line-height: 1;
+    display: block;
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 8px 8px 0px 0px;
+}
+
+#cssmenu:after,
+#cssmenu>ul:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+#cssmenu {
+    width: auto;
+    border-bottom: 3px solid rgb(255, 191, 0);
+    font-family: Raleway, sans-serif;
+    line-height: 1;
+}
+
+#cssmenu ul {
+    background: rgb(255, 221, 0);
+}
+
+#cssmenu>ul>li {
+    float: left;
+}
+
+#cssmenu.align-center>ul {
+    font-size: 0;
+    text-align: center;
+}
+
+#cssmenu.align-center>ul>li {
+    display: inline-block;
+    float: none;
+}
+
+#cssmenu.align-right>ul>li {
+    float: right;
+}
+
+#cssmenu.align-right>ul>li>a {
+    margin-right: 0;
+    margin-left: -4px;
+}
+
+#cssmenu>ul>li>a {
+    z-index: 2;
+    padding: 18px 25px 12px 25px;
+    font-size: 15px;
+    font-weight: 400;
+    text-decoration: none;
+    color: #444444;
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
+    margin-right: -4px;
+}
+
+#cssmenu>ul>li.active>a,
+#cssmenu>ul>li:hover>a,
+#cssmenu>ul>li>a:hover {
+    color: #ffffff;
+}
+
+#cssmenu>ul>li>a:after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    width: 100%;
+    height: 120%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    content: "";
+    -webkit-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
+    -webkit-transform: perspective(5px) rotateX(2deg);
+    -webkit-transform-origin: bottom;
+    -moz-transform: perspective(5px) rotateX(2deg);
+    -moz-transform-origin: bottom;
+    transform: perspective(5px) rotateX(2deg);
+    transform-origin: bottom;
+}
+
+#cssmenu>ul>li.active>a:after,
+#cssmenu>ul>li:hover>a:after,
+#cssmenu>ul>li>a:hover:after {
+    background: #47c9af;
+}
