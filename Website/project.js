@@ -31,7 +31,7 @@ function checkboxChanged() {
 }
 
 function loggedOut() {
-    //sessionStorage.setItem("username", "");
+    sessionStorage.setItem("usernamemenu", "");
     //alert("You have been logged out.")
 }
 
