@@ -36,14 +36,31 @@
                     <div id="map"></div>
                     <script>
                     function initMap() {
-                        var uluru = { lat: -25.363, lng: 131.044 };
+                        var uni = { lat: -6.3627638, lng: 106.8248595 };
+                        var centerindi = { lat: 1.75292, lng: 107.358398 };
                         var map = new google.maps.Map(document.getElementById('map'), {
-                            zoom: 4,
-                            center: uluru
+                            zoom: 5,
+                            center: centerindi
+                        });
+                        var contentString = '<div id="content">' +
+                            '<div id="siteNotice">' +
+                            '</div>' +
+                            '<h1 id="firstHeading" class="firstHeading">Universitas Indonesia</h1>' +
+                            '<div id="bodyContent">' +
+                            '<p><b>Universitas Indonesia</b>, test text <b>Ayers Rock</b></p>' +
+                            '</div>' +
+                            '</div>';
+
+                        var infowindow = new google.maps.InfoWindow({
+                            content: contentString
                         });
                         var marker = new google.maps.Marker({
-                            position: uluru,
-                            map: map
+                            position: uni,
+                            map: map,
+                            title: 'Universitas Indonesia'
+                        });
+                        marker.addListener('click', function() {
+                            infowindow.open(map, marker);
                         });
                     }
                     </script>
