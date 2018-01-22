@@ -21,12 +21,13 @@
                 <div id="nav">
                     <div id="cssmenu">
                         <ul id="menu">
-                            <li class='active'><a href='#'>Home</a></li>
-                            <!-- <div id="toggle-switch">
-                            <input type="checkbox" id="switch" />
-                            <label for="switch">toggle</label>
-                        </div> -->
+                            <li class="active"><a href='#'>Home</a></li>
+                            <li id="usernamejs"><a href '#'>.</a></li>
+                            <script type="text/javascript">
+                            window.onload = retrieveUsername;
+                            </script>
                             <li id="account" onclick="loggedOut()"><a href="loginpage.html">Log Out</a></li>
+                            <li class="toggle-switch"><a href '#'>Toggle</a></li>
                         </ul>
                     </div>
                 </div>
@@ -40,8 +41,12 @@
                         var centerindi = { lat: 1.75292, lng: 107.358398 };
                         var map = new google.maps.Map(document.getElementById('map'), {
                             zoom: 5,
-                            center: centerindi
+                            mapTypeControl: false,
+                            streetViewControl: false,
+                            center: centerindi,
+                            mapTypeId: 'hybrid'
                         });
+                        map.setOptions({ minZoom: 4, maxZoom: 8 });
                         var contentString = '<div id="content">' +
                             '<div id="siteNotice">' +
                             '</div>' +

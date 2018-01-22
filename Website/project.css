@@ -32,6 +32,17 @@ body p {
     padding-top: 2px;
 }
 
+#usernamejs {
+    position: relative;
+    left: 80%;
+    top: 18px;
+    font-family: Raleway, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    text-decoration: none;
+    color: #444444;
+}
+
 #account {
     float: right!important;
     margin-right: 5px!important;
@@ -204,10 +215,8 @@ body p {
     margin: 0px 3px 3px 1px;
 }
 
-#toggle-switch input[type=checkbox] {
-    height: 0;
-    width: 0;
-    visibility: hidden;
+.toggle-switch {
+    float: right!important;
 }
 
 

@@ -2,6 +2,7 @@ function validateForm() {
     var x = document.forms["myForm"]["username"].value;
     var x2 = document.forms["myForm"]["password"].value;
     if (x != "" & x2 != "") {
+        sessionStorage.setItem("username",x);
         alert("Welcome, " + x + "!")
         return true;
     } else {
@@ -12,6 +13,10 @@ function validateForm() {
 
 function loggedOut() {
     alert("You have been logged out.")
+}
+
+function retrieveUsername() {
+    document.getElementById("usernamejs").innerHTML = sessionStorage.getItem("username");
 }
 
 // obsolute code (work in progress)
