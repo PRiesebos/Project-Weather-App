@@ -1,32 +1,50 @@
+"use strict";
 function validateForm() {
-    var x = document.forms["myForm"]["username"].value;
-    var x2 = document.forms["myForm"]["password"].value;
-    if (x != "" & x2 != "") {
-        sessionStorage.setItem("username",x);
-        alert("Welcome, " + x + "!")
+    var x = document.forms.myForm.username.value;
+    var x2 = document.forms.myForm.password.value;
+    if (x !== "" & x2 !== "") {
+        sessionStorage.setItem("usernamemenu", x);
+        //alert("Welcome, " + x + "!")
         return true;
     } else {
-        alert("Username or password is incorrect.");
+        window.alert("Username or password is incorrect.");
         return false;
     }
 }
 
+function rememberUsername() {
+    if (sessionStorage.getItem("username") !== "") {
+        document.forms.myForm.username.value = sessionStorage.getItem("username");
+        document.getElementById("myCheckbox").checked = true;
+    } else {
+        document.getElementById("myCheckbox").checked = false;
+    }
+}
+
+function checkboxChanged() {
+    if (document.getElementById("myCheckbox").checked === false) {
+        sessionStorage.setItem("username", "");
+    } else if (document.forms.myForm.username.value !== "") {
+        var y = document.forms.myForm.username.value;
+        sessionStorage.setItem("username", y);
+    }
+}
+
 function loggedOut() {
-    sessionStorage.setItem("username","");
-    alert("You have been logged out.")
+    //sessionStorage.setItem("username", "");
+    //alert("You have been logged out.")
 }
 
 function retrieveUsername() {
-    document.getElementById("usernamejs").innerHTML = sessionStorage.getItem("username");
+    document.getElementById("usernamejs").innerHTML = sessionStorage.getItem("usernamemenu");
 }
 
 function mobileOptimizer() {
-    if ($(window).width()<=1024) {
+    if ($(window).width() <= 1024) {
         document.getElementById("map").style.width = "96vw";
         document.getElementById("map").style.height = "80vh";
         document.getElementById("mapinfo").style.display = "none";
-    }
-    else {
+    } else {
         document.getElementById("map").style.width = "75vw";
         document.getElementById("map").style.height = "82vh";
         document.getElementById("mapinfo").style.display = "inline-block";
@@ -34,7 +52,7 @@ function mobileOptimizer() {
 }
 
 $(window).resize(function() {
-    if(this.resizeTO) clearTimeout(this.resizeTO);
+    if (this.resizeTO) clearTimeout(this.resizeTO);
     this.resizeTO = setTimeout(function() {
         $(this).trigger('resizeEnd');
     }, 500);
