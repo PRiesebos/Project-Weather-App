@@ -14,21 +14,9 @@ function loggedOut() {
     alert("You have been logged out.")
 }
 
-var rememberedUserName = "";
+// obsolute code (work in progress)
 
-function rememberUsername() {
-    if (myCheckbox.checked) {
-        rememberedUserName = document.forms["myForm"]["username"].value;
-    }
-}
-
-function checkIfRememberedUsernameExists() {
-  if (rememberedUserName != "") {
-    document.forms["myForm"]["username"].value = rememberedUserName;
-  }
-}
-
-var $el = $("#login");
+/*var $el = $("#login");
 var elHeight = $el.outerHeight();
 var elWidth = $el.outerWidth();
 
@@ -59,4 +47,4 @@ var starterData = {
         height: $wrapper.height()
     }
 }
-doResize(null, starterData);
+doResize(null, starterData);*/
