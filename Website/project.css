@@ -34,13 +34,14 @@ body p {
 
 #usernamejs {
     position: relative;
-    left: 80%;
     top: 18px;
+    margin-right: 20px!important;
     font-family: Raleway, sans-serif;
     font-size: 15px;
     font-weight: 400;
     text-decoration: none;
     color: #444444;
+    float: right!important;
 }
 
 #account {
@@ -65,7 +66,7 @@ body p {
     display: inline-block;
     border-radius: 8px 8px 8px 8px;
     width: 75vw;
-    height: 80vh;
+    height: 82vh;
     background-color: white;
     border: 2px solid rgb(255, 191, 0);
 }
@@ -76,7 +77,7 @@ body p {
     float: right;
     border-radius: 8px 8px 8px 8px;
     width: 20vw;
-    height: 80vh;
+    height: 82vh;
     background-color: white;
     border: 2px solid rgb(255, 191, 0);
 }

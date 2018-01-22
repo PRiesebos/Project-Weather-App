@@ -22,12 +22,13 @@
                     <div id="cssmenu">
                         <ul id="menu">
                             <li class="active"><a href='#'>Home</a></li>
-                            <li id="usernamejs"><a href '#'>.</a></li>
                             <script type="text/javascript">
                             window.onload = retrieveUsername;
+                            window.onload = mobileOptimizer;
                             </script>
                             <li id="account" onclick="loggedOut()"><a href="loginpage.html">Log Out</a></li>
                             <li class="toggle-switch"><a href '#'>Toggle</a></li>
+                            <li id="usernamejs"><a href '#'>.</a></li>
                         </ul>
                     </div>
                 </div>
@@ -46,7 +47,7 @@
                             center: centerindi,
                             mapTypeId: 'hybrid'
                         });
-                        map.setOptions({ minZoom: 4, maxZoom: 8 });
+                        map.setOptions({ minZoom: 3, maxZoom: 8 });
                         var contentString = '<div id="content">' +
                             '<div id="siteNotice">' +
                             '</div>' +

@@ -12,12 +12,37 @@ function validateForm() {
 }
 
 function loggedOut() {
+    sessionStorage.setItem("username","");
     alert("You have been logged out.")
 }
 
 function retrieveUsername() {
     document.getElementById("usernamejs").innerHTML = sessionStorage.getItem("username");
 }
+
+function mobileOptimizer() {
+    if ($(window).width()<=1024) {
+        document.getElementById("map").style.width = "96vw";
+        document.getElementById("map").style.height = "80vh";
+        document.getElementById("mapinfo").style.display = "none";
+    }
+    else {
+        document.getElementById("map").style.width = "75vw";
+        document.getElementById("map").style.height = "82vh";
+        document.getElementById("mapinfo").style.display = "inline-block";
+    }
+}
+
+$(window).resize(function() {
+    if(this.resizeTO) clearTimeout(this.resizeTO);
+    this.resizeTO = setTimeout(function() {
+        $(this).trigger('resizeEnd');
+    }, 500);
+});
+
+$(window).bind('resizeEnd', function() {
+    mobileOptimizer();
+});
 
 // obsolute code (work in progress)
 
