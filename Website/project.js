@@ -1,4 +1,5 @@
 "use strict";
+
 function validateForm() {
     var x = document.forms.myForm.username.value;
     var x2 = document.forms.myForm.password.value;
@@ -18,12 +19,19 @@ function rememberUsername() {
         document.getElementById("myCheckbox").checked = true;
     } else {
         document.getElementById("myCheckbox").checked = false;
+        document.getElementById("name").focus();
+    }
+    if ((document.getElementById("myCheckbox").checked === true) && (document.forms.myForm.username.value !== "")) {
+        document.getElementById("password").focus();
     }
 }
 
 function checkboxChanged() {
     if (document.getElementById("myCheckbox").checked === false) {
         sessionStorage.setItem("username", "");
+        if (document.forms.myForm.username.value !== "") {
+            document.getElementById("name").focus();
+        }
     } else if (document.forms.myForm.username.value !== "") {
         var y = document.forms.myForm.username.value;
         sessionStorage.setItem("username", y);
