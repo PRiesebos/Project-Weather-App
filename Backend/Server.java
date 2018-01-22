@@ -10,6 +10,14 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.swing.text.MaskFormatter;
+
+import org.relique.jdbc.csv.CsvDriver;
 
 public class Server {
 	
@@ -17,7 +25,12 @@ public class Server {
 	File writeFile;
 	
 	public static void main(String[] args) throws IOException {
+		Thread test = new Thread(new queryThread(), "qT");
+		test.start();
+		System.out.println("Test");
 		Server server = new Server();
+		
+		
 		
 	}
 	
@@ -63,30 +76,12 @@ public class Server {
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
-		ServerSocket serverSocket = new ServerSocket(7789);
-		while(true) 
-		{
-			Socket soc = serverSocket.accept();
-			System.out.println("connected");
-			new Thread(new serverThread(soc, writeFile)).start();;
-			
-			
-		}
+        Thread sT = new Thread(new socketThread(writeFile), "sT");
+
+		sT.start();
 	}
 	
-	public void makeQuery(File dataFile) {
-		try {
-		BufferedReader br = new BufferedReader(new FileReader(dataFile));
-		String line;
-         while ((line = br.readLine()) != null) {
-
-             System.out.println(line);
-         }
 	
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-}
 }
 		
 		

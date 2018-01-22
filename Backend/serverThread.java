@@ -24,10 +24,13 @@ public class serverThread implements Runnable {
 	Socket useSoc;
 	File writeFile;
 	StringBuilder sb;
+	boolean saveData;
+	
 	public serverThread(Socket useSoc, File writeFile) {
 		this.useSoc = useSoc;
 		this.writeFile = writeFile;
 	}
+	
 	public synchronized void writeToFile(File writeFile, StringBuilder sb) {
 		try {
 			PrintWriter pw = new PrintWriter(new FileOutputStream(writeFile,true));
@@ -38,22 +41,17 @@ public class serverThread implements Runnable {
 			e.printStackTrace();
 		}
 	}
+	
 	@Override
 	public void run() {
 		while(true) {
-			
 	        StringBuilder sb = new StringBuilder();
-	        
-	        
-	        
-			try {
+			
+	        try {
 				SAXParserFactory factory = SAXParserFactory.newInstance();
 				SAXParser parser = factory.newSAXParser();
 				DefaultHandler handler = new DefaultHandler() {
-					int i = 0;
 					
-					
- 
 					boolean STN = false;
 					boolean DATE = false;
 					boolean TIME = false;
@@ -68,12 +66,10 @@ public class serverThread implements Runnable {
 					boolean FRSHTT = false;
 					boolean CLDC = false;
 					boolean WNDDIR = false;
-					
-
+				
 					public void startElement(String uri, String localName,String qName,
 				                Attributes attributes) throws SAXException {
 						
-
 						if (qName.equalsIgnoreCase("STN")) {
 							STN = true;
 						}
@@ -132,19 +128,14 @@ public class serverThread implements Runnable {
 						
 					public void endElement(String uri, String localName,
 							String qName) throws SAXException {
-
-							
-							
-							
-
 					}
 
 					public void characters(char ch[], int start, int length) throws SAXException {
-						boolean saveData = false;
+						
 						if (STN) {
 							String temp = new String(ch, start, length).replace("\n", "");
-							sb.append(temp + ',');
-							
+							sb.append(temp);
+							sb.append(',');
 							STN = false;
 						}
 							
@@ -160,13 +151,16 @@ public class serverThread implements Runnable {
 							sb.append(temp);
 							sb.append(',');
 							TIME = false;
+							
+							
 							String arr[] = temp.split(":");
 							System.out.println(arr[2]);
-							if(arr[2].equals("00") || arr[2].equals("01") || arr[2].equals("30")) {
+							if(arr[2].equals("00") || arr[2].equals("01") || arr[2].equals("30") || arr[2].equals("31")) {
 								saveData = true;
 								System.out.println("helo");
 							}else {
 								sb.delete(0, sb.length());
+								saveData = false;
 							}
 						}
 
@@ -233,18 +227,18 @@ public class serverThread implements Runnable {
 						if (WNDDIR) {
 							String temp = new String(ch, start, length).replace("\n", "");
 							sb.append(temp);
-							sb.append(";");
+							sb.append("\n");
+							
 							WNDDIR = false;
 						}
 						
-						if(sb.toString().contains(";") && saveData) {
-							sb.toString().replace(';', '\n');
-							writeToFile(writeFile,sb);
-						} else if(sb.toString().contains(";")) {
-							System.out.println(sb.toString());
+						
+						if(saveData && sb.toString().contains("\n")) {
+							System.out.println("hello");
+							writeToFile(writeFile, sb);
+						}else if(sb.toString().contains("\n")) {
 							sb.delete(0, sb.length());
 						}
-						
 						
 						
 
@@ -255,7 +249,7 @@ public class serverThread implements Runnable {
 				InputStream stream = useSoc.getInputStream();
 				parser.parse(stream, handler);
 			}catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("No data on socket");
 			}
 			
 	}
