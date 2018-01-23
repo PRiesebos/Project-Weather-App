@@ -395,3 +395,8 @@ label:active:after {
 #cssmenu>ul>li>a:hover:after {
     background: #47c9af;
 }
+
+#chartCanvas {
+    width: 500px;
+    height: 500px;
+}
