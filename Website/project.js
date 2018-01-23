@@ -1,5 +1,3 @@
-"use strict";
-
 function validateForm() {
     var x = document.forms.myForm.username.value;
     var x2 = document.forms.myForm.password.value;
@@ -106,11 +104,11 @@ function initMap() {
         openExtraInfo();
     });
 
-    //google.maps.event.addDomListener(document.getElementById('mapdiv'), 'click', function() {
-    //infowindow.close();
-    //var mapinfo = document.getElementById('mapinfo');
-    //mapinfo.removeChild(mapinfo.childNodes[0]);
-    //});
+    google.maps.event.addDomListener(document.getElementById('mapdiv'), 'click', function() {
+        infowindow.close();
+        var mapinfo = document.getElementById('mapinfo');
+        mapinfo.removeChild(mapinfo.childNodes[0]);
+    });
 }
 
 function openExtraInfo() {
