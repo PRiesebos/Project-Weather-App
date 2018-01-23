@@ -34,41 +34,8 @@
                 </div>
             </div>
             <div id="body">
-                <div id="map">
+                <div id="mapdiv">
                     <div id="map"></div>
-                    <script>
-                    function initMap() {
-                        var uni = { lat: -6.3627638, lng: 106.8248595 };
-                        var centerindi = { lat: 1.75292, lng: 107.358398 };
-                        var map = new google.maps.Map(document.getElementById('map'), {
-                            zoom: 5,
-                            mapTypeControl: false,
-                            streetViewControl: false,
-                            center: centerindi,
-                            mapTypeId: 'hybrid'
-                        });
-                        map.setOptions({ minZoom: 3, maxZoom: 8 });
-                        var contentString = '<div id="content">' +
-                            '<div id="siteNotice">' +
-                            '</div>' +
-                            '<h1 id="firstHeading" class="firstHeading">Universitas Indonesia</h1>' +
-                            '<div id="bodyContent">' +
-                            '<p><b>Universitas Indonesia</b>, test text <b>Ayers Rock</b></p>' +
-                            '</div>' +
-                            '</div>';
-                        var infowindow = new google.maps.InfoWindow({
-                            content: contentString
-                        });
-                        var marker = new google.maps.Marker({
-                            position: uni,
-                            map: map,
-                            title: 'Universitas Indonesia'
-                        });
-                        marker.addListener('click', function() {
-                            infowindow.open(map, marker);
-                        });
-                    }
-                    </script>
                     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3tabjX0Ngx8qJgK1gq1f2VrYKp-xFZRI&callback=initMap">
                     </script>
                 </div>

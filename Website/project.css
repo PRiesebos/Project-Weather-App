@@ -61,7 +61,7 @@ body p {
     background: rgb(255, 221, 0);
 }
 
-#map {
+#mapdiv {
     position: relative;
     display: inline-block;
     border-radius: 8px 8px 8px 8px;
@@ -80,6 +80,10 @@ body p {
     height: 82vh;
     background-color: white;
     border: 2px solid rgb(255, 191, 0);
+}
+
+#mapinfo p {
+    margin: 15px;
 }
 
 #logo {
