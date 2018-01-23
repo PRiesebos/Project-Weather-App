@@ -88,7 +88,7 @@ body p {
 
 #logo {
     display: inline-block;
-    margin: 5px;
+    margin: 5px 5px 0px 5px;
 }
 
 #logo img {
@@ -397,6 +397,8 @@ label:active:after {
 }
 
 #chartCanvas {
-    width: 500px;
-    height: 500px;
+    width: 40%;
+    height: 40%;
+    border: 2px solid rgb(255, 191, 0);
+    border-radius: 8px 8px 8px 8px;
 }

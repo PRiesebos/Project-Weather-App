@@ -47,12 +47,12 @@ function retrieveUsername() {
 
 function mobileOptimizer() {
     if ($(window).width() <= 1024) {
-        document.getElementById("map").style.width = "96vw";
-        document.getElementById("map").style.height = "80vh";
+        document.getElementById("mapdiv").style.width = "96vw";
+        document.getElementById("mapdiv").style.height = "80vh";
         document.getElementById("mapinfo").style.display = "none";
     } else {
-        document.getElementById("map").style.width = "75vw";
-        document.getElementById("map").style.height = "82vh";
+        document.getElementById("mapdiv").style.width = "78vw";
+        document.getElementById("mapdiv").style.height = "82vh";
         document.getElementById("mapinfo").style.display = "inline-block";
     }
 }
