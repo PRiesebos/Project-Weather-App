@@ -46,14 +46,25 @@ function retrieveUsername() {
 }
 
 function mobileOptimizer() {
-    if ($(window).width() <= 1024) {
-        document.getElementById("mapdiv").style.width = "96vw";
+    if ($(window).width() <= 1000) {
+        document.getElementById("mapdiv").style.width = "100%";
         document.getElementById("mapdiv").style.height = "80vh";
+        document.getElementById("body-container").style.margin = "0px 4px 0px 0px";
+        jQuery("ul#menu > li > a").css("padding", "18px 21px 12px 21px");
         document.getElementById("mapinfo").style.display = "none";
+        document.getElementById("usernamejs").style.display = "inline-block";
+        if (($(window).width() <= 700)) {
+            document.getElementById("usernamejs").style.display = "none";
+        }
+    } else if ($(window).width() <= 1200) {
+        document.getElementById("usernamejs").style.display = "inline-block";
     } else {
         document.getElementById("mapdiv").style.width = "78vw";
         document.getElementById("mapdiv").style.height = "82vh";
+        document.getElementById("body-container").style.margin = "0px 0px 0px 0px";
+        jQuery("ul#menu > li > a").css("padding", "18px 25px 12px 25px");
         document.getElementById("mapinfo").style.display = "inline-block";
+        document.getElementById("usernamejs").style.display = "inline-block";
     }
 }
 
@@ -105,9 +116,9 @@ function initMap() {
     });
 
     google.maps.event.addDomListener(document.getElementById('mapdiv'), 'click', function() {
-        infowindow.close();
-        var mapinfo = document.getElementById('mapinfo');
-        mapinfo.removeChild(mapinfo.childNodes[0]);
+        //infowindow.close();
+        //var mapinfo = document.getElementById('mapinfo');
+        //mapinfo.removeChild(mapinfo.childNodes[0]);
     });
 }
 

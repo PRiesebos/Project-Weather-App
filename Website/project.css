@@ -1,3 +1,7 @@
+html {
+    background-color: #e6e8f0;
+}
+
 body {
     min-height: 100%;
     margin: 0px;
@@ -12,9 +16,12 @@ body p {
     padding-bottom: 100px;
 }
 
+#body-container {
+    margin: 0px 0px 0px 0px;
+}
+
 .wrapper-home {
     resize: both;
-    background-color: #e6e8f0;
     height: -webkit-fill-available;
     width: auto;
 }
@@ -22,7 +29,6 @@ body p {
 .wrapper-login {
     resize: both;
     position: relative;
-    background-color: #e6e8f0;
     height: 100vh;
     width: 100vw;
 }
@@ -53,7 +59,7 @@ body p {
     margin-bottom: 10px;
 }
 
-#footer {
+.footer {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -61,11 +67,15 @@ body p {
     background: rgb(255, 221, 0);
 }
 
+.container-footer {
+    display: inline-block;
+}
+
 #mapdiv {
     position: relative;
     display: inline-block;
     border-radius: 8px 8px 8px 8px;
-    width: 78vw;
+    width: 80%;
     height: 82vh;
     background-color: white;
     border: 2px solid rgb(255, 191, 0);
@@ -76,7 +86,7 @@ body p {
     display: inline-block;
     float: right;
     border-radius: 8px 8px 8px 8px;
-    width: 20vw;
+    width: 19%;
     height: 82vh;
     background-color: white;
     border: 2px solid rgb(255, 191, 0);
@@ -116,7 +126,6 @@ body p {
     min-height: 100%;
     margin-left: 5px;
     margin-right: 5px;
-    background-color: #e6e8f0;
 }
 
 .login {
