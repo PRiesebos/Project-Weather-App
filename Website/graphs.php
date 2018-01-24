@@ -22,12 +22,12 @@
                 <div id="nav">
                     <div id="cssmenu">
                         <ul id="menu">
-                            <li><a href='homepage.html'>Home</a></li>
-                            <li class="active"><a href="graphs.html">Graphs</a></li>
+                            <li><a href='index.php'>Home</a></li>
+                            <li class="active"><a href="graphs.php">Graphs</a></li>
                             <script type="text/javascript">
                             window.onload = retrieveUsername;
                             </script>
-                            <li id="account" onclick="loggedOut()"><a href="loginpage.html">Log Out</a></li>
+                            <li id="account" onclick="loggedOut()"><a href="loginpage.php">Log Out</a></li>
                             <li class="toggle-switch"><a href="#">Toggle</a></li>
                             <li id="usernamejs"><a href="#">.</a></li>
                         </ul>

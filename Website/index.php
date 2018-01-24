@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+
+<?php
+session_start();
+if(isset($_POST['logout']))
+{
+ unset($_SESSION['email']);
+}
+?>
+
 <html>
 
 <head>
@@ -21,13 +30,16 @@
                 <div id="nav">
                     <div id="cssmenu">
                         <ul id="menu">
-                            <li class="active"><a href='#'>Home</a></li>
-                            <li id="graphs"><a href="graphs.html">Graphs</a></li>
+                            <li class="active"><a href='index.php'>Home</a></li>
+                            <li id="graphs"><a href="graphs.php">Graphs</a></li>
                             <script type="text/javascript">
                             window.onload = mobileOptimizer;
                             window.onload = retrieveUsername;
                             </script>
-                            <li id="account" onclick="loggedOut()"><a href="loginpage.html">Log Out</a></li>
+                            <!-- <li id="account" onclick="loggedOut()"><a href="loginpage.php">Log Out</a></li> -->
+                            <form class="logoutbutton" method='post'>
+                                <input type='submit' name='logout' value='Logout'>
+                            </form>
                             <li class="toggle-switch"><a href="#">Toggle</a></li>
                             <li id="usernamejs"><a href="#">.</a></li>
                         </ul>

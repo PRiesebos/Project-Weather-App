@@ -231,6 +231,16 @@ body p {
 
 .toggle-switch {
     float: right!important;
+    position: relative;
+    right: 20px;
+}
+
+.logoutbutton {
+    display: inline-block;
+    position: relative;
+    float: right;
+    top: 15px;
+    right: 9px;
 }
 
 

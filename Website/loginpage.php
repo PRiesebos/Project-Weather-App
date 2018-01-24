@@ -24,15 +24,15 @@
                 <p>Universitas Indonesia Weather App</p>
             </div>
             <div id="login-body">
-                <form name="myForm" id="ajax-login" action="homepage.html" onsubmit="return validateForm()" method="post">
+                <form name="myForm" id="ajax-login" onsubmit="return do_login();" method="post" action="do_login.php">
                     <div class="form-group">
-                        <input class="form-control" type="text" id="name" name="username" placeholder="Username">
+                        <input class="form-control" type="text" id="email" name="email" placeholder="Username">
                     </div>
                     <div class="form-group">
                         <input class="form-control" type="password" id="password" name="password" placeholder="Password">
                     </div>
                     <div class="form-group">
-                        <button class="submitbtn" type="submit" value="submit">Submit</button>
+                        <button class="submitbtn" type="submit" name="login" value="DO LOGIN">Submit</button>
                     </div>
                 </form>
             </div>

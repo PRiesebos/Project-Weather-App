@@ -1,4 +1,5 @@
-function validateForm() {
+//kan later weg
+/*function validateForm() {
     var x = document.forms.myForm.username.value;
     var x2 = document.forms.myForm.password.value;
     if (x !== "" & x2 !== "") {
@@ -9,17 +10,38 @@ function validateForm() {
         window.alert("Username or password is incorrect.");
         return false;
     }
+}*/
+
+//nog niet in gebruik
+function validate() {
+    var email = $("#email").val();
+    var pass = $("#password").val();
+
+    var email_regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    var password_regex1 = /([a-z].*[A-Z])|([A-Z].*[a-z])([0-9])+([!,%,&,@,#,$,^,*,?,_,~])/;
+    var password_regex2 = /([0-9])/;
+    var password_regex3 = /([!,%,&,@,#,$,^,*,?,_,~])/;
+
+    if (email_regex.test(email) === false) {
+        window.alert("Please Enter Correct Email");
+        return false;
+    } else if (pass.length < 8 || password_regex1.test(pass) === false || password_regex2.test(pass) === false || password_regex3.test(pass) === false) {
+        window.alert("Please Enter Strong Password");
+        return false;
+    } else {
+        return true;
+    }
 }
 
 function rememberUsername() {
     if ((sessionStorage.getItem("username") !== "") && (sessionStorage.getItem("username") !== null)) {
-        document.forms.myForm.username.value = sessionStorage.getItem("username");
+        document.forms.myForm.email.value = sessionStorage.getItem("username");
         document.getElementById("myCheckbox").checked = true;
     } else {
         document.getElementById("myCheckbox").checked = false;
-        document.getElementById("name").focus();
+        document.getElementById("email").focus();
     }
-    if ((document.getElementById("myCheckbox").checked === true) && (document.forms.myForm.username.value !== "")) {
+    if ((document.getElementById("myCheckbox").checked === true) && (document.forms.myForm.email.value !== "")) {
         document.getElementById("password").focus();
     }
 }
@@ -27,11 +49,11 @@ function rememberUsername() {
 function checkboxChanged() {
     if (document.getElementById("myCheckbox").checked === false) {
         sessionStorage.setItem("username", "");
-        if (document.forms.myForm.username.value !== "") {
-            document.getElementById("name").focus();
+        if (document.forms.myForm.email.value !== "") {
+            document.getElementById("email").focus();
         }
-    } else if (document.forms.myForm.username.value !== "") {
-        var y = document.forms.myForm.username.value;
+    } else if (document.forms.myForm.email.value !== "") {
+        var y = document.forms.myForm.email.value;
         sessionStorage.setItem("username", y);
     }
 }
@@ -165,3 +187,32 @@ var starterData = {
     }
 }
 doResize(null, starterData);*/
+
+//login function with php
+
+function do_login() {
+    var email = $("#email").val();
+    var pass = $("#password").val();
+    if (email !== "" && pass !== "") {
+        $.ajax({
+            type: 'post',
+            url: 'do_login.php',
+            data: {
+                do_login: "do_login",
+                email: email,
+                password: pass
+            },
+            success: function(response) {
+                if (response == "success") {
+                    window.location.href = "index.php";
+                } else {
+                    window.alert("Username or password is incorrect!");
+                }
+            }
+        });
+    } else {
+        window.alert("Username or password is missing!");
+    }
+
+    return false;
+}
