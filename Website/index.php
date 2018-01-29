@@ -2,9 +2,12 @@
 
 <?php
 session_start();
-if(isset($_POST['logout']))
+if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
 {
  unset($_SESSION['email']);
+    if(!isset($_SESSION['email'])){
+    header("Location:loginpage.php");
+    }
 }
 ?>
 
@@ -38,7 +41,7 @@ if(isset($_POST['logout']))
                             </script>
                             <!-- <li id="account" onclick="loggedOut()"><a href="loginpage.php">Log Out</a></li> -->
                             <form class="logoutbutton" method='post'>
-                                <input type='submit' name='logout' value='Logout'>
+                                <input type='submit' name='logout' value='logout'>
                             </form>
                             <li class="toggle-switch"><a href="#">Toggle</a></li>
                             <li id="usernamejs"><a href="#">.</a></li>
