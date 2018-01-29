@@ -1,30 +1,24 @@
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.Savepoint;
+import java.nio.ByteBuffer;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
-
-import org.xml.sax.*;
 
 public class serverThread implements Runnable {
 	Socket useSoc;
 	File writeFile;
 	StringBuilder sb;
 	boolean saveData;
+	byte test[] = null;
 	
 	public serverThread(Socket useSoc, File writeFile) {
 		this.useSoc = useSoc;
@@ -132,10 +126,22 @@ public class serverThread implements Runnable {
 
 					public void characters(char ch[], int start, int length) throws SAXException {
 						
+						ByteBuffer buf = ByteBuffer.allocate(4);
+						
+						/* STN fits in int: 4 bytes. */
 						if (STN) {
 							String temp = new String(ch, start, length).replace("\n", "");
-							sb.append(temp);
-							sb.append(',');
+							int test2 = Integer.parseInt(temp);
+							buf.putInt(test2);
+							byte temparr[] = buf.array();
+							for(int i = 0; i < 4; i++) {
+								try{
+									test[i] = temparr[i];
+								} catch(Exception e) {
+									e.printStackTrace();
+								}
+							}
+								
 							STN = false;
 						}
 							
@@ -166,38 +172,86 @@ public class serverThread implements Runnable {
 
 						if (TEMP) {
 							String temp = new String(ch, start, length).replace("\n", "");
-							sb.append(temp);
-							sb.append(',');
+							float test2 = Float.parseFloat(temp);
+							buf.putFloat(test2);
+							byte temparr[] = buf.array();
+							for(int i = 0; i < 4; i++) {
+								try{
+									test[i+12] = temparr[i];
+								} catch(Exception e) {
+									e.printStackTrace();
+								}
+							}
 							TEMP = false; 
 						}
 						if (DEWP) {
 							String temp = new String(ch, start, length).replace("\n", "");
-							sb.append(temp);
-							sb.append(',');
+							float test2 = Float.parseFloat(temp);
+							buf.putFloat(test2);
+							byte temparr[] = buf.array();
+							for(int i = 0; i < 4; i++) {
+								try{
+									test[i+16] = temparr[i];
+								} catch(Exception e) {
+									e.printStackTrace();
+								}
+							}
 							DEWP = false; 
 						}
 						if (STP) {
 							String temp = new String(ch, start, length).replace("\n", "");
-							sb.append(temp);
-							sb.append(',');
+							float test2 = Float.parseFloat(temp);
+							buf.putFloat(test2);
+							byte temparr[] = buf.array();
+							for(int i = 0; i < 4; i++) {
+								try{
+									test[i+20] = temparr[i];
+								} catch(Exception e) {
+									e.printStackTrace();
+								}
+							}
 							STP = false; 
 						}
 						if (SLP) {
 							String temp = new String(ch, start, length).replace("\n", "");
-							sb.append(temp);
-							sb.append(',');
+							float test2 = Float.parseFloat(temp);
+							buf.putFloat(test2);
+							byte temparr[] = buf.array();
+							for(int i = 0; i < 4; i++) {
+								try{
+									test[i+24] = temparr[i];
+								} catch(Exception e) {
+									e.printStackTrace();
+								}
+							}
 							SLP = false; 
 						}
 						if (VISIB) {
 							String temp = new String(ch, start, length).replace("\n", "");
-							sb.append(temp);
-							sb.append(',');
+							float test2 = Float.parseFloat(temp);
+							buf.putFloat(test2);
+							byte temparr[] = buf.array();
+							for(int i = 0; i < 4; i++) {
+								try{
+									test[i+28] = temparr[i];
+								} catch(Exception e) {
+									e.printStackTrace();
+								}
+							}
 							VISIB = false; 
 						}
 						if (WDSP) {
 							String temp = new String(ch, start, length).replace("\n", "");
-							sb.append(temp);
-							sb.append(',');
+							float test2 = Float.parseFloat(temp);
+							buf.putFloat(test2);
+							byte temparr[] = buf.array();
+							for(int i = 0; i < 4; i++) {
+								try{
+									test[i+32] = temparr[i];
+								} catch(Exception e) {
+									e.printStackTrace();
+								}
+							}
 							WDSP = false; 
 						}
 						if (PRCP) {
