@@ -27,7 +27,7 @@ if(isset($_POST['do_login']))
 	$user = isset($_POST['email']) ? ($_POST['email']) : '';
 	$pass = isset($_POST['password']) ? $_POST['password'] : '';
 
-	if (isset($credentials[$user]) || $credentials[$user] == $pass)
+	if (isset($credentials[$user]) && $credentials[$user] == $pass)
 	 	{
 			$_SESSION['email'] = $_POST['email'];
 			echo "success";

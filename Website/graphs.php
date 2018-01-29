@@ -26,6 +26,9 @@ if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
 </head>
 
 <body>
+    <script type="text/javascript">
+        window.onload = function() {document.getElementById("usernamejs").innerHTML = sessionStorage.getItem("usernamemenu")};
+    </script>
     <div class="wrapper-home">
         <div class="homepage">
             <div id="header">
@@ -36,12 +39,9 @@ if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
                         <ul id="menu">
                             <li><a href='index.php'>Home</a></li>
                             <li class="active"><a href="graphs.php">Graphs</a></li>
-                            <script type="text/javascript">
-                            window.onload = retrieveUsername;
-                            </script>
                             <li id="account" onclick="loggedOut()"><a href="loginpage.php">Log Out</a></li>
                             <li class="toggle-switch"><a href="#">Toggle</a></li>
-                            <li id="usernamejs"><a href="#">.</a></li>
+                            <li id="usernamejs">.<a href="#"></a></li>
                         </ul>
                     </div>
                 </div>

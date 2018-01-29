@@ -1,18 +1,4 @@
-//kan later weg
-/*function validateForm() {
-    var x = document.forms.myForm.username.value;
-    var x2 = document.forms.myForm.password.value;
-    if (x !== "" & x2 !== "") {
-        sessionStorage.setItem("usernamemenu", x);
-        //window.alert("Welcome, " + x + "!")
-        return true;
-    } else {
-        window.alert("Username or password is incorrect.");
-        return false;
-    }
-}*/
-
-//nog niet in gebruik
+//nog niet in gebruik kan vervangen worden door htmlspecialchars
 function validate() {
     var email = $("#email").val();
     var pass = $("#password").val();
@@ -35,8 +21,13 @@ function validate() {
 
 function rememberUsername() {
     if ((sessionStorage.getItem("username") !== "") && (sessionStorage.getItem("username") !== null)) {
-        document.forms.myForm.email.value = sessionStorage.getItem("username");
         document.getElementById("myCheckbox").checked = true;
+        if (sessionStorage.getItem("checkbox") == "checked") {
+        document.forms.myForm.email.value = sessionStorage.getItem("username");
+        }
+        else {
+            document.forms.myForm.email.value = sessionStorage.getItem("usernamemenu");
+        }
     } else {
         document.getElementById("myCheckbox").checked = false;
         document.getElementById("email").focus();
@@ -58,13 +49,21 @@ function checkboxChanged() {
     }
 }
 
-function loggedOut() {
-    sessionStorage.setItem("usernamemenu", "");
-    //window.alert("You have been logged out.")
+function setUsername() {
+    var x = document.forms.myForm.email.value;
+    sessionStorage.setItem("usernamemenu", x);
+    if (sessionStorage.getItem("username") == sessionStorage.getItem("usernamemenu")) {
+        sessionStorage.setItem("checkbox","checked");
+    }
+    else {
+        sessionStorage.setItem("username",sessionStorage.getItem("usernamemenu"));
+        sessionStorage.setItem("checkbox","unchecked");
+    }
 }
 
+//werkt random niet meet met apache
 function retrieveUsername() {
-    document.getElementById("usernamejs").innerHTML = sessionStorage.getItem("usernamemenu");
+    document.getElementById("usernamejs").innerHTML = sessionStorage.getItem("username");
 }
 
 function mobileOptimizer() {

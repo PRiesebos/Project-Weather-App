@@ -37,7 +37,7 @@ session_start();
                         <input class="form-control" type="password" id="password" name="password" placeholder="Password">
                     </div>
                     <div class="form-group">
-                        <button class="submitbtn" type="submit" name="login" value="DO LOGIN">Submit</button>
+                        <button class="submitbtn" onclick="setUsername();" type="submit" name="login" value="DO LOGIN">Submit</button>
                     </div>
                 </form>
             </div>
