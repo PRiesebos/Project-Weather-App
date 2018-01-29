@@ -24,11 +24,13 @@ public class Server {
 	Socket clientSocket;
 	File writeFile;
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		Thread test = new Thread(new queryThread(), "qT");
 		test.start();
 		System.out.println("Test");
 		Server server = new Server();
+		Thread.sleep(30000);
+		Socket sendSoc = new Socket();
 		
 		
 		
