@@ -39,7 +39,9 @@ if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
                         <ul id="menu">
                             <li><a href='index.php'>Home</a></li>
                             <li class="active"><a href="graphs.php">Graphs</a></li>
-                            <li id="account" onclick="loggedOut()"><a href="loginpage.php">Log Out</a></li>
+                            <form class="logoutbutton" method='post'>
+                                <input type='submit' name='logout' value='logout'>
+                            </form>
                             <li class="toggle-switch"><a href="#">Toggle</a></li>
                             <li id="usernamejs">.<a href="#"></a></li>
                         </ul>

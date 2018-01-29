@@ -1,3 +1,0 @@
-USER: Peter PASS: test
-USER: Mark PASS: test
-USER: Bart PASS: noob

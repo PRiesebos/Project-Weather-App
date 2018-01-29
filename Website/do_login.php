@@ -2,7 +2,10 @@
 session_start();
 if(isset($_POST['do_login']))
 	{
-	$lines = file('logindata.txt');
+/*	
+ * Possible file reading
+
+$lines = file('logindata.txt');
 	$credentials = array();
 
 	foreach($lines as $line) {
@@ -22,12 +25,19 @@ if(isset($_POST['do_login']))
 
 		// putting them together
 		$credentials[$username] = $password;
-	}
+*/
+
+	$logins = array(
+   	'Peter' => 'test',
+   	'Mark' => 'test',
+   	'Bart' => 'test',
+    'Jaron' => 'test',
+	);
 
 	$user = isset($_POST['email']) ? ($_POST['email']) : '';
 	$pass = isset($_POST['password']) ? $_POST['password'] : '';
 
-	if (isset($credentials[$user]) && $credentials[$user] == $pass)
+	if (isset($logins[$user]) && $logins[$user] == $pass)
 	 	{
 			$_SESSION['email'] = $_POST['email'];
 			echo "success";

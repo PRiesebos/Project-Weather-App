@@ -2,6 +2,21 @@
 
 <?php
 session_start();
+
+// define variables and set to empty values
+$email = $password = $pass = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $name = test_input($_POST["email"]);
+  $password = test_input($_POST["password"]);
+}
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
 ?>
 
 <html>
@@ -29,12 +44,12 @@ session_start();
                 <p>Universitas Indonesia Weather App</p>
             </div>
             <div id="login-body">
-                <form name="myForm" id="ajax-login" onsubmit="return do_login();" method="post" action="do_login.php">
+                <form name="myForm" id="ajax-login" onsubmit="return do_login();" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <div class="form-group">
-                        <input class="form-control" type="text" id="email" name="email" placeholder="Username">
+                        <input class="form-control" type="text" id="email" name="email" placeholder="Username" required>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="password" id="password" name="password" placeholder="Password">
+                        <input class="form-control" type="password" id="password" name="password" placeholder="Password" required>
                     </div>
                     <div class="form-group">
                         <button class="submitbtn" onclick="setUsername();" type="submit" name="login" value="DO LOGIN">Submit</button>
