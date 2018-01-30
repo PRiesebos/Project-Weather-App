@@ -28,7 +28,7 @@ $lines = file('logindata.txt');
 */
 
 	$logins = array(
-   	'Peter' => 'test',
+   	'p.c.riesebos@st.hanze.nl' => 'test321',
    	'Mark' => 'test',
    	'Bart' => 'test',
     'Jaron' => 'test',

@@ -40,9 +40,13 @@ if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
                                 window.onload = function() {document.getElementById("usernamejs").innerHTML = sessionStorage.getItem("usernamemenu")};
                             </script>
                             <form class="logoutbutton" method='post'>
-                                <input type='submit' name='logout' value='logout'>
+                                <input type='submit' name='logout' value='Logout'>
                             </form>
-                            <li class="toggle-switch"><a href="#">Toggle</a></li>
+                            <label class="switch" id="switchjs">
+                                <input type="checkbox" id="myCheck" onclick="setTimeout(mapChange,500)" value="unchecked" <?php /*Hier komt nog code om checked wel of niet te zetten*/ ?>>
+                                    <div class="slider" id="sliderjs">
+                                    </div>
+                            </label>
                             <li id="usernamejs">.<a href="#"></a></li>
                         </ul>
                     </div>

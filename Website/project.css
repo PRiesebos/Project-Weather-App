@@ -41,13 +41,14 @@ body p {
 #usernamejs {
     position: relative;
     top: 18px;
-    margin-right: 20px!important;
+    margin-right: 25px!important;
     font-family: Raleway, sans-serif;
     font-size: 15px;
     font-weight: 400;
     text-decoration: none;
     color: #444444;
     float: right!important;
+    font-weight: 400;
 }
 
 #account {
@@ -243,43 +244,6 @@ body p {
     right: 9px;
 }
 
-
-label {
-    cursor: pointer;
-    text-indent: -9999px;
-    width: 75px;
-    height: 30px;
-    background: grey;
-    display: inline-block;
-    border-radius: 100px;
-    position: relative;
-}
-
-label:after {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    width: 26px;
-    height: 20px;
-    background: #fff;
-    border-radius: 90px;
-    transition: 0.3s;
-}
-
-input:checked+label {
-    background: #bada55;
-}
-
-input:checked+label:after {
-    left: calc(100% - 5px);
-    transform: translateX(-100%);
-}
-
-label:active:after {
-    width: 40px;
-}
-
 #login-body .submitbtn {
     width: 100%;
     font-weight: 500;
@@ -297,11 +261,150 @@ label:active:after {
     white-space: nowrap;
 }
 
+
+
+
+
+/* Hide default HTML checkbox */
+
+.switch input {
+    display: none;
+}
+
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
+    width: 100px;
     height: 34px;
+    top: 7px;
+    float: right;
+    margin-left: 0px;
+    margin-right: 30px;
+}
+
+@media (max-width: 420px) and (min-width: 351px) {
+    .switch {
+        width: 100px;
+    }
+    #cssmenu>ul>li>a {
+        padding: 18px 18px 12px 18px!important;
+    }
+    .login {
+        width: 425px;
+    }
+    #login-icon {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+@media (max-width: 350px) {
+    .switch {
+        width: 96px;
+        margin-right: 16px;
+        margin-left: 0px;
+    }
+    #cssmenu>ul>li>a {
+        padding: 18px 15px 12px 15px!important;
+    }
+    .logoutbutton input[type=submit] {
+        padding: 7px 3px;
+    }
+    .logoutbutton {
+        margin-right: 0px;
+    }
+    #usernamejs {
+        display: none;
+    }
+    input:checked+.slider:before {
+        transform: translateX(62px)!important;
+    }
+    .login {
+        width: 360px;
+    }
+    #login-icon {
+        width: 80px;
+        height: 80px;
+        left: 0px;
+    }
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ca2222;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(65px);
+}
+
+.slider:after {
+    content: 'Temp';
+    color: white;
+    display: block;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    font-size: 13px;
+    font-family: Roboto, sans-serif;
+}
+
+input:checked+.slider:after {
+    content: 'Wind';
+}
+
+.logoutbutton input[type=submit] {
+    padding: 7px 7px;
+    background: #47c9af;
+    border: 0 none;
+    cursor: pointer;
+    border-radius: 5px;
+    position: relative;
+    display: block;
+    top: -5px;
+    color: #fff;
+    font-weight: 300;
+    font-family: Roboto, sans-serif;
+}
+
+.logoutbutton input[type=submit]:hover {
+    box-shadow: inset 0px 0px 0px 2px #fff;
 }
 
 @import url(http://fonts.googleapis.com/css?family=Raleway);
@@ -320,6 +423,7 @@ label:active:after {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     border-radius: 8px 8px 0px 0px;
+    =: 15px
 }
 
 #cssmenu:after,
@@ -420,4 +524,5 @@ label:active:after {
     height: 40%;
     border: 2px solid rgb(255, 191, 0);
     border-radius: 8px 8px 8px 8px;
+    margin-bottom: 5px;
 }

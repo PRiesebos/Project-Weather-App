@@ -23,9 +23,8 @@ function rememberUsername() {
     if ((sessionStorage.getItem("username") !== "") && (sessionStorage.getItem("username") !== null)) {
         document.getElementById("myCheckbox").checked = true;
         if (sessionStorage.getItem("checkbox") == "checked") {
-        document.forms.myForm.email.value = sessionStorage.getItem("username");
-        }
-        else {
+            document.forms.myForm.email.value = sessionStorage.getItem("username");
+        } else {
             document.forms.myForm.email.value = sessionStorage.getItem("usernamemenu");
         }
     } else {
@@ -53,11 +52,10 @@ function setUsername() {
     var x = document.forms.myForm.email.value;
     sessionStorage.setItem("usernamemenu", x);
     if (sessionStorage.getItem("username") == sessionStorage.getItem("usernamemenu")) {
-        sessionStorage.setItem("checkbox","checked");
-    }
-    else {
-        sessionStorage.setItem("username",sessionStorage.getItem("usernamemenu"));
-        sessionStorage.setItem("checkbox","unchecked");
+        sessionStorage.setItem("checkbox", "checked");
+    } else {
+        sessionStorage.setItem("username", sessionStorage.getItem("usernamemenu"));
+        sessionStorage.setItem("checkbox", "unchecked");
     }
 }
 
@@ -66,16 +64,17 @@ function retrieveUsername() {
     document.getElementById("usernamejs").innerHTML = sessionStorage.getItem("username");
 }
 
+//Could be replaced by css (@media)
 function mobileOptimizer() {
     if ($(window).width() <= 1000) {
         document.getElementById("mapdiv").style.width = "100%";
         document.getElementById("mapdiv").style.height = "80vh";
         document.getElementById("body-container").style.margin = "0px 4px 0px 0px";
-        jQuery("ul#menu > li > a").css("padding", "18px 21px 12px 21px");
         document.getElementById("mapinfo").style.display = "none";
         document.getElementById("usernamejs").style.display = "inline-block";
         if (($(window).width() <= 700)) {
             document.getElementById("usernamejs").style.display = "none";
+            document.getElementById("switchjs").style.witdh = "72px";
         }
     } else if ($(window).width() <= 1200) {
         document.getElementById("usernamejs").style.display = "inline-block";
@@ -83,7 +82,6 @@ function mobileOptimizer() {
         document.getElementById("mapdiv").style.width = "78vw";
         document.getElementById("mapdiv").style.height = "82vh";
         document.getElementById("body-container").style.margin = "0px 0px 0px 0px";
-        jQuery("ul#menu > li > a").css("padding", "18px 25px 12px 25px");
         document.getElementById("mapinfo").style.display = "inline-block";
         document.getElementById("usernamejs").style.display = "inline-block";
     }
@@ -100,47 +98,112 @@ $(window).bind('resizeEnd', function() {
     mobileOptimizer();
 });
 
+//function for toggle switch Temperature/wind
+function mapChange() {
+    if ((sessionStorage.getItem("mapType") == "Temp") && (document.getElementById("myCheck").value == "unchecked")) {
+        sessionStorage.setItem("mapType", "Wind");
+        sessionStorage.setItem("myCheckState", "checked");
+        var myVar = "checked";
+
+        $.ajax({
+            url: "index.php",
+            type: "POST",
+            data: { "myData": myVar }
+        });
+        location.reload();
+    } else if ((sessionStorage.getItem("mapType") === null) || (sessionStorage.getItem("mapType") == "Wind")) {
+        sessionStorage.setItem("mapType", "Temp");
+        sessionStorage.setItem("myCheckState", "unchecked");
+        location.reload();
+    }
+}
+
 //google maps
 
 function initMap() {
-    var uni = { lat: -6.3627638, lng: 106.8248595 };
-    var centerindi = { lat: 1.75292, lng: 107.358398 };
-    var map = new google.maps.Map(document.getElementById('mapdiv'), {
-        zoom: 5,
-        mapTypeControl: false,
-        streetViewControl: false,
-        zoomControl: false,
-        draggable: false,
-        keyboardShortcuts: false,
-        center: centerindi,
-        mapTypeId: 'hybrid'
-    });
-    var contentString = '<div id="content">' +
-        '<div id="siteNotice">' +
-        '</div>' +
-        '<h1 id="firstHeading" class="firstHeading">Universitas Indonesia</h1>' +
-        '<div id="bodyContent">' +
-        '<p><b>Universitas Indonesia</b>, test text <b>Ayers Rock</b></p>' +
-        '</div>' +
-        '</div>';
-    var infowindow = new google.maps.InfoWindow({
-        content: contentString
-    });
-    var marker = new google.maps.Marker({
-        position: uni,
-        map: map,
-        title: 'Universitas Indonesia'
-    });
-    marker.addListener('click', function() {
-        infowindow.open(map, marker);
-        openExtraInfo();
-    });
+    if (sessionStorage.getItem("mapType") == "Temp") {
+        var uni = { lat: -6.3627638, lng: 106.8248595 };
+        var centerindi = { lat: 1.75292, lng: 107.358398 };
+        var map = new google.maps.Map(document.getElementById('mapdiv'), {
+            zoom: 5,
+            mapTypeControl: false,
+            streetViewControl: false,
+            gestureHandling: 'greedy',
+            zoomControl: false,
+            draggable: true,
+            keyboardShortcuts: false,
+            center: centerindi,
+            mapTypeId: 'hybrid'
+        });
+        map.setOptions({ minZoom: 5, maxZoom: 5 });
+        var contentString = '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h1 id="firstHeading" class="firstHeading">Universitas Indonesia</h1>' +
+            '<div id="bodyContent">' +
+            '<p><b>Universitas Indonesia</b>, Temp map <b>Ayers Rock</b></p>' +
+            '</div>' +
+            '</div>';
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+        var marker = new google.maps.Marker({
+            position: uni,
+            map: map,
+            title: 'Universitas Indonesia'
+        });
+        marker.addListener('click', function() {
+            infowindow.open(map, marker);
+            openExtraInfo();
+        });
 
-    google.maps.event.addDomListener(document.getElementById('mapdiv'), 'click', function() {
-        //infowindow.close();
-        //var mapinfo = document.getElementById('mapinfo');
-        //mapinfo.removeChild(mapinfo.childNodes[0]);
-    });
+        google.maps.event.addDomListener(document.getElementById('mapdiv'), 'click', function() {
+            //infowindow.close();
+            //var mapinfo = document.getElementById('mapinfo');
+            //mapinfo.removeChild(mapinfo.childNodes[0]);
+        });
+    } else if (sessionStorage.getItem("mapType") == "Wind") {
+        var uni2 = { lat: -6.3627638, lng: 106.8248595 };
+        var centerindi2 = { lat: 1.75292, lng: 107.358398 };
+        var map2 = new google.maps.Map(document.getElementById('mapdiv'), {
+            zoom: 5,
+            mapTypeControl: false,
+            streetViewControl: false,
+            gestureHandling: 'greedy',
+            zoomControl: false,
+            draggable: true,
+            keyboardShortcuts: false,
+            center: centerindi2,
+            mapTypeId: 'hybrid'
+        });
+        map2.setOptions({ minZoom: 5, maxZoom: 5 });
+        var contentString2 = '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h1 id="firstHeading" class="firstHeading">Universitas Indonesia</h1>' +
+            '<div id="bodyContent">' +
+            '<p><b>Universitas Indonesia</b>, Wind map</p>' +
+            '</div>' +
+            '</div>';
+        var infowindow2 = new google.maps.InfoWindow({
+            content: contentString2
+        });
+        var marker2 = new google.maps.Marker({
+            position: uni2,
+            map: map2,
+            title: 'Universitas Indonesia'
+        });
+        marker2.addListener('click', function() {
+            infowindow.open(map2, marker2);
+            //openExtraInfo2();
+        });
+
+        google.maps.event.addDomListener(document.getElementById('mapdiv'), 'click', function() {
+            //infowindow.close();
+            //var mapinfo = document.getElementById('mapinfo');
+            //mapinfo.removeChild(mapinfo.childNodes[0]);
+        });
+    }
 }
 
 function openExtraInfo() {

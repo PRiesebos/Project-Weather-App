@@ -42,7 +42,10 @@ if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
                             <form class="logoutbutton" method='post'>
                                 <input type='submit' name='logout' value='logout'>
                             </form>
-                            <li class="toggle-switch"><a href="#">Toggle</a></li>
+                            <label class="switch">
+                                <input type="checkbox" id="myCheck" onclick="mapChange()">
+                                    <span class="slider"></span>
+                            </label>
                             <li id="usernamejs">.<a href="#"></a></li>
                         </ul>
                     </div>
@@ -50,7 +53,7 @@ if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
             </div>
             <div id="body">
                 <div id="chartCanvas">
-                    <canvas id="myChart" width="400" height="400"></canvas>
+                    <canvas id="myChart" width="400" height="400px"></canvas>
                     <script>
                     var ctx = document.getElementById("myChart").getContext('2d');
                     var myChart = new Chart(ctx, {

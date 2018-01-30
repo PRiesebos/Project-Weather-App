@@ -2,6 +2,10 @@
 
 <?php
 session_start();
+if(isset($_SESSION['email']))
+{
+    header("Location:index.php");
+}
 
 // define variables and set to empty values
 $email = $password = $pass = "";
