@@ -526,3 +526,8 @@ input:checked+.slider:after {
     border-radius: 8px 8px 8px 8px;
     margin-bottom: 5px;
 }
+
+div #hiddenData {
+    visibility: hidden;
+    height: 0px;
+}
