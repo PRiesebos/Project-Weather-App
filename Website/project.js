@@ -102,18 +102,20 @@ $(window).bind('resizeEnd', function() {
 function mapChange() {
     if ((sessionStorage.getItem("mapType") == "Temp") && (document.getElementById("myCheck").value == "unchecked")) {
         sessionStorage.setItem("mapType", "Wind");
-        sessionStorage.setItem("myCheckState", "checked");
-        var myVar = "checked";
-
-        $.ajax({
-            url: "index.php",
-            type: "POST",
-            data: { "myData": myVar }
-        });
+        var state = $("#myCheck").val();
+        if (state !== "") {
+            $.ajax({
+                type: 'post',
+                url: 'index.php',
+                data: {
+                    state: state
+                }
+            });
+        }
         location.reload();
     } else if ((sessionStorage.getItem("mapType") === null) || (sessionStorage.getItem("mapType") == "Wind")) {
         sessionStorage.setItem("mapType", "Temp");
-        sessionStorage.setItem("myCheckState", "unchecked");
+        var myVar = "";
         location.reload();
     }
 }
@@ -121,7 +123,7 @@ function mapChange() {
 //google maps
 
 function initMap() {
-    if (sessionStorage.getItem("mapType") == "Temp") {
+    if ((sessionStorage.getItem("mapType") == "Temp") || (sessionStorage.getItem("mapType") === null)) {
         var uni = { lat: -6.3627638, lng: 106.8248595 };
         var centerindi = { lat: 1.75292, lng: 107.358398 };
         var map = new google.maps.Map(document.getElementById('mapdiv'), {
