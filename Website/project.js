@@ -77,7 +77,7 @@ $(window).bind('resizeEnd', function() {
     mobileOptimizer();
 });
 
-//function for toggle switch Temperature/wind
+//Function for toggle switch Temperature/wind.
 
 function mapChange() {
     if ((sessionStorage.getItem("mapType") == "Temp") && (document.getElementById("myCheck").value == "unchecked")) {
@@ -101,13 +101,13 @@ function initMap() {
             mapTypeControl: false,
             streetViewControl: false,
             gestureHandling: 'greedy',
-            zoomControl: false,
+            zoomControl: true,
             draggable: true,
             keyboardShortcuts: false,
             center: centerindi,
             mapTypeId: 'hybrid'
         });
-        map.setOptions({ minZoom: 5, maxZoom: 5 });
+        map.setOptions({ minZoom: 3, maxZoom: 15 });
         var contentString = '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
