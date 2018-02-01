@@ -1,3 +1,24 @@
+//nog niet in gebruik kan vervangen worden door htmlspecialchars
+function validate() {
+    var email = $("#email").val();
+    var pass = $("#password").val();
+
+    var email_regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    var password_regex1 = /([a-z].*[A-Z])|([A-Z].*[a-z])([0-9])+([!,%,&,@,#,$,^,*,?,_,~])/;
+    var password_regex2 = /([0-9])/;
+    var password_regex3 = /([!,%,&,@,#,$,^,*,?,_,~])/;
+
+    if (email_regex.test(email) === false) {
+        window.alert("Please Enter Correct Email");
+        return false;
+    } else if (pass.length < 8 || password_regex1.test(pass) === false || password_regex2.test(pass) === false || password_regex3.test(pass) === false) {
+        window.alert("Please Enter Strong Password");
+        return false;
+    } else {
+        return true;
+    }
+}
+
 function rememberUsername() {
     if ((sessionStorage.getItem("username") !== "") && (sessionStorage.getItem("username") !== null)) {
         document.getElementById("myCheckbox").checked = true;
@@ -78,10 +99,19 @@ $(window).bind('resizeEnd', function() {
 });
 
 //function for toggle switch Temperature/wind
-
 function mapChange() {
     if ((sessionStorage.getItem("mapType") == "Temp") && (document.getElementById("myCheck").value == "unchecked")) {
         sessionStorage.setItem("mapType", "Wind");
+        var state = $("#myCheck").val();
+        if (state !== "") {
+            $.ajax({
+                type: 'post',
+                url: 'index.php',
+                data: {
+                    state: state
+                }
+            });
+        }
         location.reload();
     } else if ((sessionStorage.getItem("mapType") === null) || (sessionStorage.getItem("mapType") == "Wind")) {
         sessionStorage.setItem("mapType", "Temp");
@@ -91,11 +121,17 @@ function mapChange() {
 }
 
 //google maps
-var infowindow;
+function makeMarker() {
+
+}
 
 function initMap() {
+
+
+
+
     if ((sessionStorage.getItem("mapType") == "Temp") || (sessionStorage.getItem("mapType") === null)) {
-        var uni = { lat: -6.3627638, lng: 106.8248595 };
+
         var centerindi = { lat: 1.75292, lng: 107.358398 };
         var map = new google.maps.Map(document.getElementById('mapdiv'), {
             zoom: 5,
@@ -120,23 +156,81 @@ function initMap() {
         var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
-        var station728740 = new google.maps.Marker({
-            position: uni,
-            map: map,
-            title: 'Universitas Indonesia'
-        });
-        station728740.addListener('click', function() {
-            infowindow.open(map, station728740);
-            openExtraInfo();
-        });
 
-        google.maps.event.addListener(map, 'click', function() {
-            openExtraInfo();
-            if (infowindow) {
-                infowindow.close();
+        var test = document.getElementById("hiddenDataStations").innerHTML;
+        var arrText = test.split('\n');
+        var StationArray = [];
+        kek = test.substring(2, 20);
+        for (i = 2; i < arrText.length; i++) {
+            var EndString = "";
+            var Line = arrText[i];
+            var Stationnum = Line.substring(2, 7);
+            EndString = EndString.concat(Stationnum);
+            EndString = EndString.concat(",");
+            var Stationname = Line.substring(Line.lastIndexOf("[") + 1, Line.lastIndexOf("]"));
+            EndString = EndString.concat(Stationname);
+
+            EndString = EndString.replace("\"", "");
+            EndString = EndString.replace("\"", "");
+            EndString = EndString.replace("\"", "");
+            EndString = EndString.replace("\"", "");
+            EndString = EndString.replace("\"", "");
+            EndString = EndString.replace("\"", "");
+            EndString = EndString.replace("\"", "");
+            EndString = EndString.replace("\"", "");
+            EndString = EndString.replace("\"", "");
+            EndString = EndString.replace("\"", "");
+
+            var WordArray = EndString.split(",");
+            StationArray.push(WordArray);
+
+            var marker, i;
+            for (i = 0; i < StationArray.length; i++) {
+
+                marker = new google.maps.Marker({
+                    position: { lat: parseFloat(StationArray[i][3]), lng: parseFloat(StationArray[i][4]) },
+                    map: map,
+                    title: StationArray[i][1]
+                });
+
+                marker.addListener('click', function() {
+
+                    infowindow.open(map, marker);
+                    $.ajax({
+                        url: '/get',
+                        type: 'GET',
+                        dataType: 'text',
+                        data: { param1: 'value1' },
+                    });
+                    window.alert(marker[0]);
+                    openExtraInfo();
+                });
             }
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        google.maps.event.addDomListener(document.getElementById('mapdiv'), 'click', function() {
+            //infowindow.close();
+            //var mapinfo = document.getElementById('mapinfo');
+            //mapinfo.removeChild(mapinfo.childNodes[0]);
         });
     } else if (sessionStorage.getItem("mapType") == "Wind") {
+
         var uni2 = { lat: -6.3627638, lng: 106.8248595 };
         var centerindi2 = { lat: 1.75292, lng: 107.358398 };
         var map2 = new google.maps.Map(document.getElementById('mapdiv'), {
@@ -180,19 +274,58 @@ function initMap() {
     }
 }
 
+/*function openExtraInfo() {
+    if (document.getElementById('mapinfo').childElementCount <= 0) {
+        var para = document.createElement("P");
+        var t = document.createTextNode("On this location additional info for the weather stations at the current marker will be displayed. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+        para.appendChild(t);
+        document.getElementById('mapinfo').appendChild(para);
+    }
+}*/
+
 function openExtraInfo() {
-    if ((document.getElementById('mapinfo').childElementCount <= 0) && ($("#siteNotice").length !== 0)) {
+    if (document.getElementById('mapinfo').childElementCount <= 0) {
         var para = document.createElement("P");
         var t = document.createTextNode(document.getElementById("hiddenData").innerHTML);
         para.appendChild(t);
         document.getElementById('mapinfo').appendChild(para);
-    } else if (($("#siteNotice").length > 0) || (document.getElementById('mapinfo').childElementCount >= 0)) {
-        $("#mapinfo").empty();
-/*        if (infowindow) {
-            infowindow.close();
-        }*/
     }
 }
+
+// obsolute code (work in progress)
+
+/*var $el = $("#login");
+var elHeight = $el.outerHeight();
+var elWidth = $el.outerWidth();
+
+var $wrapper = $("#wrapper-login");
+
+$wrapper.resizable({
+    resize: doResize
+});
+
+function doResize(event, ui) {
+
+    var scale, origin;
+
+    scale = Math.min(
+        ui.size.width / elWidth,
+        ui.size.height / elHeight
+    );
+
+    $el.css({
+        transform: "translate(-50%, -50%) " + "scale(" + scale + ")"
+    });
+
+}
+
+var starterData = {
+    size: {
+        width: $wrapper.width(),
+        height: $wrapper.height()
+    }
+}
+doResize(null, starterData);*/
 
 //login function with php
 
