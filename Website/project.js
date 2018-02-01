@@ -147,14 +147,15 @@ function initMap() {
             var WordArray = EndString.split(",");
             StationArray.push(WordArray);
 
-            for (j = 0; j < StationArray.length; j++) {
+            var marker, i;
+
+            for (i = 0; i < StationArray.length; i++) {
                 marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(parseFloat(StationArray[j][3]), parseFloat(StationArray[j][4])),
+                    position: new google.maps.LatLng(parseFloat(StationArray[i][3]), parseFloat(StationArray[i][4])),
                     map: map
                 });
 
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                    openExtraInfo();
                     return function() {
                         infowindow.setContent(StationArray[i][0]);
                         infowindow.open(map, marker);
