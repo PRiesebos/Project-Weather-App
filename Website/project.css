@@ -527,7 +527,12 @@ input:checked+.slider:after {
     margin-bottom: 5px;
 }
 
-div #hiddenData, div #hiddenDataStations {
+div #hiddenData {
+    visibility: hidden;
+    height: 0px;
+}
+
+div #hiddenDataStations {
     visibility: hidden;
     height: 0px;
 }

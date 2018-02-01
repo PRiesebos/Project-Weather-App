@@ -25,37 +25,6 @@ if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
 </head>
 
 <body>
-
-    <div id="hiddenDataStations">
-        <?php
-        function get_string_between($string, $start, $end){
-             $string = '' . $string;
-            $ini = strpos($string, $start);
-            if ($ini == 0) return '';
-            $ini += strlen($start);
-             $len = strpos($string, $end, $ini) - $ini;
-             return substr($string, $ini, $len);
-            }
-
-
-            $lines = file("stations.txt");;
-            foreach ($lines as $value) {
-                if(trim(str_replace("\n","",$value)) != ""){
-                    echo $value;
-                    
-                }
-                
-
-                
-                }
-                
-                
-            
-            
-
-
-        ?>
-    </div>
     <div class="wrapper-home">
         <div class="homepage">
             <div id="header">
@@ -74,8 +43,7 @@ if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
                                 <input type='submit' name='logout' value='Logout'>
                             </form>
                             <label class="switch" id="switchjs">
-                                <input type="checkbox" id="myCheck" onclick="setTimeout(mapChange,500)" value="unchecked" 
-                                <?php ?>>
+                                <input type="checkbox" id="myCheck" onclick="setTimeout(mapChange,500)" value="unchecked" >
                                     <div class="slider" id="sliderjs">
                                     </div>
                             </label>
@@ -93,33 +61,33 @@ if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
                     </div>
                     <div id="mapinfo">
                     </div>
-                    <!-- Data gets put in a hidden div element and split with php. -->
-                    <!-- With javascript, variable containing the data within an array gets set in the mapinfo element. -->
                     <div id="hiddenData">
-                        <?php
-                        $lineArray = array();
-                        $lines = file('data.csv');
-                        //$speciulcounter = 0;
-                        foreach ($lines as $selLine) {
-                            $wordArray = explode(",", $selLine);
-                            array_push($lineArray, $wordArray);
+                        <?php $lines = file('data.csv'); $data = array();
+                            foreach($lines as $line) {
+                            if (empty($line)) 
+                                continue;
+                                $lineArr = explode(',', $line);
+                                foreach($lineArr as $value){
+                                echo $value;}
+                            } ?>
+                    </div>
+                    <div id="hiddenDataStations">
+                    <?php
+                    function get_string_between($string, $start, $end){
+                        $string = '' . $string;
+                        $ini = strpos($string, $start);
+                        if ($ini == 0) return '';
+                        $ini += strlen($start);
+                        $len = strpos($string, $end, $ini) - $ini;
+                        return substr($string, $ini, $len);
                         }
-                        
-                        echo "Stationnumber: ". $lineArray[1][0];
-                        echo "      Date: ". $lineArray[1][1];
-                        echo "        Time: ". $lineArray[1][2];
-                        echo "        Temp: ". $lineArray[1][3];
-                        echo "        Dewpoint: ". $lineArray[1][4];
-                        echo "        STP: ". $lineArray[1][5];
-                        echo "        SLP: ". $lineArray[1][6];
-                        echo "        Visibility: ". $lineArray[1][7];
-                        echo "        WDSP: ". $lineArray[1][8];
-                        echo "        PRCP: ". $lineArray[1][9];
-                        echo "        SNDP: ". $lineArray[1][10];
-                        echo "        FRSHTT: ". $lineArray[1][11];
-                        echo "        CLDC: ". $lineArray[1][12];
-                        echo "        WNDDIR: ". $lineArray[1][13];
-                        ?>
+
+                        $lines = file("stations.txt");;
+                        foreach ($lines as $value) {
+                            if(trim(str_replace("\n","",$value)) != ""){
+                                echo $value;   
+                            }
+                        } ?>
                     </div>
                 </div>
                 <div class="footer">
@@ -133,7 +101,6 @@ if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
             </div>
         </div>
     </div>
-   ]
 </body>
 
 </html>
