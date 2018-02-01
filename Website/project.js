@@ -147,31 +147,20 @@ function initMap() {
             var WordArray = EndString.split(",");
             StationArray.push(WordArray);
 
-            var marker, i;
-            for (i = 0; i < StationArray.length; i++) {
-
+            for (j = 0; j < StationArray.length; j++) {
                 marker = new google.maps.Marker({
-                    position: { lat: parseFloat(StationArray[i][3]), lng: parseFloat(StationArray[i][4]) },
-                    map: map,
-                    title: StationArray[i][1]
-
+                    position: new google.maps.LatLng(parseFloat(StationArray[j][3]), parseFloat(StationArray[j][4])),
+                    map: map
                 });
 
-                marker.addListener('click', function() {
-
-                    infowindow.open(map, marker);
-                    $.ajax({
-                        url: '/get',
-                        type: 'GET',
-                        dataType: 'text',
-                        data: { param1: 'value1' },
-                    });
-                    window.alert(marker);
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
                     openExtraInfo();
-                });
+                    return function() {
+                        infowindow.setContent(StationArray[i][0]);
+                        infowindow.open(map, marker);
+                };
+                })(marker, i));
             }
-
-
         }
 
         google.maps.event.addDomListener(document.getElementById('mapdiv'), 'click', function() {
