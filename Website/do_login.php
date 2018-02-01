@@ -1,5 +1,6 @@
 <?php
 session_start();
+$number = 1;
 if(isset($_POST['do_login']))
 	{
 /*	

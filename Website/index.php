@@ -43,8 +43,7 @@ if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
                                 <input type='submit' name='logout' value='Logout'>
                             </form>
                             <label class="switch" id="switchjs">
-                                <input type="checkbox" id="myCheck" onclick="setTimeout(mapChange,500)" value="unchecked" 
-                                <?php ?>>
+                                <input type="checkbox" id="myCheck" onclick="setTimeout(mapChange,500)" value="unchecked" >
                                     <div class="slider" id="sliderjs">
                                     </div>
                             </label>
@@ -62,8 +61,6 @@ if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
                     </div>
                     <div id="mapinfo">
                     </div>
-                    <!-- Data gets put in a hidden div element and split with php. -->
-                    <!-- With javascript, variable containing the data within an array gets set in the mapinfo element. -->
                     <div id="hiddenData">
                         <?php $lines = file('data.csv'); $data = array();
                             foreach($lines as $line) {
