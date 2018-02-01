@@ -157,7 +157,9 @@ function initMap() {
 
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
                     return function() {
-                        infowindow.setContent(StationArray[i][0]);
+                        var StatInfo = "";
+                        StatInfo = StatInfo.concat("Stationnummer: ", StationArray[i][0]," Place: ",StationArray[i][1]);
+                        infowindow.setContent(StatInfo);
                         infowindow.open(map, marker);
                 };
                 })(marker, i));
