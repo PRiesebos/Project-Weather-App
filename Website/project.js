@@ -170,13 +170,13 @@ function initMap() {
             StationArray.push(WordArray);
 
             var marker, i;
-            
+
             for (i = 0; i < StationArray.length; i++) {
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(parseFloat(StationArray[i][3]), parseFloat(StationArray[i][4])),
                     icon: 'stat.png',
                     map: map
-                    
+
                 });
 
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -220,21 +220,58 @@ function initMap() {
         var infowindow2 = new google.maps.InfoWindow({
             content: contentString2
         });
-        var marker2 = new google.maps.Marker({
-            position: uni2,
-            map: map2,
-            title: 'Universitas Indonesia'
-        });
-        marker2.addListener('click', function() {
-            infowindow2.open(map2, marker2);
-            //openExtraInfo2();
-        });
+        var test2 = document.getElementById("hiddenDataStations").innerHTML;
+        var arrText2 = test2.split('\n');
+        var StationArray2 = [];
+        kek2 = test2.substring(2, 20);
+        for (i = 2; i < arrText2.length; i++) {
+            var EndString2 = "";
+            var Line2 = arrText2[i];
+            var Stationnum2 = Line2.substring(2, 7);
+            EndString2 = EndString2.concat(Stationnum2);
+            EndString2 = EndString2.concat(",");
+            var Stationname2 = Line2.substring(Line2.lastIndexOf("[") + 1, Line2.lastIndexOf("]"));
+            EndString2 = EndString2.concat(Stationname2);
 
-        google.maps.event.addDomListener(document.getElementById('mapdiv'), 'click', function() {
-            //infowindow.close();
-            //var mapinfo = document.getElementById('mapinfo');
-            //mapinfo.removeChild(mapinfo.childNodes[0]);
-        });
+            EndString2 = EndString2.replace("\"", "");
+            EndString2 = EndString2.replace("\"", "");
+            EndString2 = EndString2.replace("\"", "");
+            EndString2 = EndString2.replace("\"", "");
+            EndString2 = EndString2.replace("\"", "");
+            EndString2 = EndString2.replace("\"", "");
+            EndString2 = EndString2.replace("\"", "");
+            EndString2 = EndString2.replace("\"", "");
+            EndString2 = EndString2.replace("\"", "");
+            EndString2 = EndString2.replace("\"", "");
+
+            var WordArray2 = EndString2.split(",");
+            StationArray2.push(WordArray2);
+
+            var marker2, i;
+
+            for (i = 0; i < StationArray2.length; i++) {
+                marker2 = new google.maps.Marker({
+                    position: new google.maps.LatLng(parseFloat(StationArray2[i][3]), parseFloat(StationArray2[i][4])),
+                    icon: 'stat.png',
+                    map: map2
+
+                });
+
+                google.maps.event.addListener(marker2, 'click', (function(marker2, i) {
+                    return function() {
+                        var StatInfo2 = "";
+
+                        StatInfo2 = StatInfo2.concat("Stationnummer: ", StationArray2[i][0], " Place", StationArray2[i][1]);
+                        infowindow2.setContent(StatInfo2);
+                        infowindow2.open(map, marker2);
+
+                        post('http://localhost/ProjectWeather/query.php', { stn: "" + StationArray2[i][0] }, 'get');
+
+
+                    };
+                })(marker2, i));
+            }
+        }
     }
 }
 
