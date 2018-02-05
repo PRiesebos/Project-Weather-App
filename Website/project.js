@@ -77,7 +77,7 @@ $(window).bind('resizeEnd', function() {
     mobileOptimizer();
 });
 
-//Function for toggle switch Temperature/wind.
+//function for toggle switch Temperature/wind
 
 function mapChange() {
     if ((sessionStorage.getItem("mapType") == "Temp") && (document.getElementById("myCheck").value == "unchecked")) {
@@ -93,21 +93,47 @@ function mapChange() {
 //google maps
 var infowindow;
 
+function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+        }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
 function initMap() {
+    
     if ((sessionStorage.getItem("mapType") == "Temp") || (sessionStorage.getItem("mapType") === null)) {
+        post('index.php', {isChecked : 'false'}, 'get');
         var centerindi = { lat: 1.75292, lng: 107.358398 };
         var map = new google.maps.Map(document.getElementById('mapdiv'), {
             zoom: 5,
             mapTypeControl: false,
             streetViewControl: false,
             gestureHandling: 'greedy',
-            zoomControl: true,
+            zoomControl: false,
             draggable: true,
             keyboardShortcuts: false,
             center: centerindi,
             mapTypeId: 'hybrid'
         });
-        map.setOptions({ minZoom: 3, maxZoom: 15 });
+        map.setOptions({ minZoom: 5, maxZoom: 5 });
         var contentString = '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
@@ -158,10 +184,15 @@ function initMap() {
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
                     return function() {
                         var StatInfo = "";
-                        StatInfo = StatInfo.concat("Stationnummer: ", StationArray[i][0]," Place: ",StationArray[i][1]);
+
+                        StatInfo = StatInfo.concat("Stationnummer: ", StationArray[i][0], " Place", StationArray[i][1]);
                         infowindow.setContent(StatInfo);
                         infowindow.open(map, marker);
-                };
+
+                        post('http://localhost/ProjectWeather/query.php',{stn: "" + StationArray[i][0]}, 'get');
+                        
+
+                    };
                 })(marker, i));
             }
         }
@@ -172,6 +203,7 @@ function initMap() {
             //mapinfo.removeChild(mapinfo.childNodes[0]);
         });
     } else if (sessionStorage.getItem("mapType") == "Wind") {
+        post('index.php', {isChecked : 'true'}, 'get');
 
         var uni2 = { lat: -6.3627638, lng: 106.8248595 };
         var centerindi2 = { lat: 1.75292, lng: 107.358398 };
@@ -204,7 +236,7 @@ function initMap() {
             title: 'Universitas Indonesia'
         });
         marker2.addListener('click', function() {
-            infowindow.open(map2, marker2);
+            infowindow2.open(map2, marker2);
             //openExtraInfo2();
         });
 
