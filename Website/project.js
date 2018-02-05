@@ -120,7 +120,6 @@ function post(path, params, method) {
 function initMap() {
     
     if ((sessionStorage.getItem("mapType") == "Temp") || (sessionStorage.getItem("mapType") === null)) {
-        post('index.php', {isChecked : 'false'}, 'get');
         var centerindi = { lat: 1.75292, lng: 107.358398 };
         var map = new google.maps.Map(document.getElementById('mapdiv'), {
             zoom: 5,
@@ -174,11 +173,13 @@ function initMap() {
             StationArray.push(WordArray);
 
             var marker, i;
-
+            
             for (i = 0; i < StationArray.length; i++) {
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(parseFloat(StationArray[i][3]), parseFloat(StationArray[i][4])),
+                    icon: 'stat.png',
                     map: map
+                    
                 });
 
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -203,7 +204,7 @@ function initMap() {
             //mapinfo.removeChild(mapinfo.childNodes[0]);
         });
     } else if (sessionStorage.getItem("mapType") == "Wind") {
-        post('index.php', {isChecked : 'true'}, 'get');
+
 
         var uni2 = { lat: -6.3627638, lng: 106.8248595 };
         var centerindi2 = { lat: 1.75292, lng: 107.358398 };
