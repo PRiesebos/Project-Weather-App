@@ -22,7 +22,7 @@ body p {
 
 .wrapper-home {
     resize: both;
-    height: -webkit-fill-available;
+    height: auto;
     width: auto;
 }
 
@@ -230,12 +230,6 @@ body p {
     margin: 0px 3px 3px 1px;
 }
 
-.toggle-switch {
-    float: right!important;
-    position: relative;
-    right: 20px;
-}
-
 .logoutbutton {
     display: inline-block;
     position: relative;
@@ -344,6 +338,10 @@ body p {
     -webkit-transition: .4s;
     transition: .4s;
     border-radius: 34px;
+}
+
+.slider:hover {
+    box-shadow: inset 0px 0px 0px 1.5px #fff;
 }
 
 .slider:before {
@@ -530,9 +528,12 @@ input:checked+.slider:after {
 div #hiddenData {
     visibility: hidden;
     height: 0px;
+    display: none;
 }
+
 
 div #hiddenDataStations {
     visibility: hidden;
     height: 0px;
+    display: none;
 }

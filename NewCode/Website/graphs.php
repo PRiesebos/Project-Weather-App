@@ -22,7 +22,7 @@ if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
     <script src="project.js"></script>
     <link rel="stylesheet" href="project.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700|Roboto:300,400,500,700" rel="stylesheet">
-    <title>Weather Graphs</title>
+    <title>Weather Info Graphs</title>
 </head>
 
 <body>

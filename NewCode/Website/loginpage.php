@@ -7,7 +7,7 @@ if(isset($_SESSION['email']))
     header("Location:index.php");
 }
 
-// define variables and set to empty values
+// Define variables and set to empty values.
 $email = $password = $pass = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

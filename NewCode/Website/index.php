@@ -2,6 +2,7 @@
 
 <?php
 session_start();
+error_reporting(0);
 if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
 {
 	unset($_SESSION['email']);
@@ -75,7 +76,14 @@ function get_string_between($string, $start, $end){
                                 <input type='submit' name='logout' value='Logout'>
                             </form>
                             <label class="switch" id="switchjs">
-                                <input type="checkbox" id="myCheck" onclick="setTimeout(mapChange,500)" value="unchecked" >
+                                <input type="checkbox" id="myCheck" onclick="setTimeout(mapChange,500)" value="unchecked" <?php 
+                                if($_GET['isChecked'] == 'true'){
+                                    echo "checked";
+                                    }
+                                elseif($_GET['isChecked'] == 'false'){
+                                    echo "";
+                                    }
+                                ?>  >
                                     <div class="slider" id="sliderjs">
                                     </div>
                             </label>
@@ -92,20 +100,20 @@ function get_string_between($string, $start, $end){
                         </script>
                     </div>
                     <div id="mapinfo">
-	<?php //echo file_get_contents("http://127.0.0.1/study/2.2/legacywebsite/getdata.php?stationID=10590"); ?>
-                    </div>
-                    <div id="hiddenData">
-						<?php listData('data.csv') ?>
                     </div>
                     <div id="hiddenDataStations">
-                    <?php listStations('stations.txt') ?>
+                    <?php 
+                        listStations('stations.txt') 
+                    ?>
                     </div>
                 </div>
                 <div class="footer">
                     <div id="bar"></div>
                     <div id="inner">
                         <div id="logo">
-                            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/da/Universitas_Indonesia_logo.svg/1280px-Universitas_Indonesia_logo.svg.png" alt="logo">
+                            <a href="http://www.ui.ac.id">
+                                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/da/Universitas_Indonesia_logo.svg/1280px-Universitas_Indonesia_logo.svg.png" alt="logo">
+                            </a>
                         </div>
                     </div>
                 </div>

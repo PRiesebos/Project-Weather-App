@@ -80,14 +80,37 @@ $(window).bind('resizeEnd', function() {
 //Function for toggle switch Temperature/wind.
 
 function mapChange() {
-    if ((sessionStorage.getItem("mapType") == "Temp") && (document.getElementById("myCheck").value == "unchecked")) {
-        sessionStorage.setItem("mapType", "Wind");
-        location.reload();
-    } else if ((sessionStorage.getItem("mapType") === null) || (sessionStorage.getItem("mapType") == "Wind")) {
+    if ((sessionStorage.getItem("mapType") == "Wind") && (document.getElementById("myCheck").value == "unchecked")) {
         sessionStorage.setItem("mapType", "Temp");
-        var myVar = "";
-        location.reload();
+        post('index.php', { isChecked: 'false' }, 'get');
+    } else if ((sessionStorage.getItem("mapType") === null) || (sessionStorage.getItem("mapType") == "Temp")) {
+        sessionStorage.setItem("mapType", "Wind");
+        post('index.php', { isChecked: 'true' }, 'get');
     }
+}
+
+function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for (var key in params) {
+        if (params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+        }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
 }
 
 //google maps
@@ -95,19 +118,19 @@ var infowindow;
 
 function initMap() {
     if ((sessionStorage.getItem("mapType") == "Temp") || (sessionStorage.getItem("mapType") === null)) {
-        var centerindi = { lat: 1.75292, lng: 107.358398 };
+        var centerindi = { lat: 6.107784, lng: 119.003906 };
         var map = new google.maps.Map(document.getElementById('mapdiv'), {
             zoom: 5,
             mapTypeControl: false,
             streetViewControl: false,
             gestureHandling: 'greedy',
-            zoomControl: true,
+            zoomControl: false,
             draggable: true,
             keyboardShortcuts: false,
             center: centerindi,
             mapTypeId: 'hybrid'
         });
-        map.setOptions({ minZoom: 3, maxZoom: 15 });
+        map.setOptions({ minZoom: 4, maxZoom: 9 });
         var contentString = '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
@@ -153,6 +176,7 @@ function initMap() {
             for (i = 0; i < StationArray.length; i++) {
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(parseFloat(StationArray[i][3]), parseFloat(StationArray[i][4])),
+                    icon: 'stat.png',
                     map: map
                 });
 
@@ -168,15 +192,8 @@ function initMap() {
             }
         }
 
-        google.maps.event.addDomListener(document.getElementById('mapdiv'), 'click', function() {
-            //infowindow.close();
-            //var mapinfo = document.getElementById('mapinfo');
-            //mapinfo.removeChild(mapinfo.childNodes[0]);
-        });
     } else if (sessionStorage.getItem("mapType") == "Wind") {
-
-        var uni2 = { lat: -6.3627638, lng: 106.8248595 };
-        var centerindi2 = { lat: 1.75292, lng: 107.358398 };
+        var centerindi2 = { lat: 6.107784, lng: 119.003906 };
         var map2 = new google.maps.Map(document.getElementById('mapdiv'), {
             zoom: 5,
             mapTypeControl: false,
@@ -188,7 +205,7 @@ function initMap() {
             center: centerindi2,
             mapTypeId: 'hybrid'
         });
-        map2.setOptions({ minZoom: 5, maxZoom: 5 });
+map2.setOptions({ minZoom: 4, maxZoom: 9 });
         var contentString2 = '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
@@ -200,21 +217,54 @@ function initMap() {
         var infowindow2 = new google.maps.InfoWindow({
             content: contentString2
         });
-        var marker2 = new google.maps.Marker({
-            position: uni2,
-            map: map2,
-            title: 'Universitas Indonesia'
-        });
-        marker2.addListener('click', function() {
-            infowindow.open(map2, marker2);
-            //openExtraInfo2();
-        });
+        var test2 = document.getElementById("hiddenDataStations").innerHTML;
+        var arrText2 = test2.split('\n');
+        var StationArray2 = [];
+        kek2 = test2.substring(2, 20);
+        for (i = 2; i < arrText2.length; i++) {
+            var EndString2 = "";
+            var Line2 = arrText2[i];
+            var Stationnum2 = Line2.substring(2, 8);
+            EndString2 = EndString2.concat(Stationnum2);
+            EndString2 = EndString2.concat(",");
+            var Stationname2 = Line2.substring(Line2.lastIndexOf("[") + 1, Line2.lastIndexOf("]"));
+            EndString2 = EndString2.concat(Stationname2);
 
-        google.maps.event.addDomListener(document.getElementById('mapdiv'), 'click', function() {
-            //infowindow.close();
-            //var mapinfo = document.getElementById('mapinfo');
-            //mapinfo.removeChild(mapinfo.childNodes[0]);
-        });
+            EndString2 = EndString2.replace("\"", "");
+            EndString2 = EndString2.replace("\"", "");
+            EndString2 = EndString2.replace("\"", "");
+            EndString2 = EndString2.replace("\"", "");
+            EndString2 = EndString2.replace("\"", "");
+            EndString2 = EndString2.replace("\"", "");
+            EndString2 = EndString2.replace("\"", "");
+            EndString2 = EndString2.replace("\"", "");
+            EndString2 = EndString2.replace("\"", "");
+            EndString2 = EndString2.replace("\"", "");
+
+            var WordArray2 = EndString2.split(",");
+            StationArray2.push(WordArray2);
+
+            var marker2, i;
+
+            for (i = 0; i < StationArray2.length; i++) {
+                marker2 = new google.maps.Marker({
+                    position: new google.maps.LatLng(parseFloat(StationArray2[i][3]), parseFloat(StationArray2[i][4])),
+                    icon: 'stat.png',
+                    map: map2
+
+                });
+
+                google.maps.event.addListener(marker2, 'click', (function(marker2, i) {
+                    return function() {
+                        var StatInfo2 = "";
+
+                        StatInfo2 = StatInfo2.concat("Stationnummer: ", StationArray2[i][0], " Place", StationArray2[i][1]);
+                        infowindow2.setContent(StatInfo2);
+                        infowindow2.open(map, marker2);
+                    };
+                })(marker2, i));
+            }
+        }
     }
 }
 
@@ -229,20 +279,6 @@ function openExtraInfo(id) {
 	var fileContent = xmlhttp.responseText;
 	document.getElementById('mapinfo').innerHTML = fileContent;
 	$("mapinfo").load(url);
-	
-    /*if ((document.getElementById('mapinfo').childElementCount <= 0) && ($("#siteNotice").length !== 0)) {
-		
-		
-        //var para = document.createElement("table");
-        //var t = document.createTextNode(document.getElementById("hiddenData").innerHTML);
-        //para.appendChild(t);
-        //document.getElementById('mapinfo').appendChild(para);
-    } else if (($("#siteNotice").length > 0) || (document.getElementById('mapinfo').childElementCount >= 0)) {
-        $("#mapinfo").empty();
-        /*        if (infowindow) {
-                    infowindow.close();
-                }*
-    }*/
 }
 
 //login function with php
