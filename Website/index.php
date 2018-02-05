@@ -2,14 +2,45 @@
 
 <?php
 session_start();
-error_reporting(0);
 if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
 {
- unset($_SESSION['email']);
-    if(!isset($_SESSION['email'])){
-    header("Location:loginpage.php");
+	unset($_SESSION['email']);
+		if(!isset($_SESSION['email'])) {
+		header("Location:loginpage.php");
     }
 }
+
+function listData($filelocation) {
+	$lines = file($filelocation); $data = array();
+	foreach($lines as $line) {
+	if (empty($line)) 
+		continue;
+		$lineArr = explode(',', $line);
+		foreach($lineArr as $value){
+		echo $value;}
+	}
+}
+
+function listStations($filelocation) {
+	$lines = file($filelocation);
+	foreach ($lines as $value) {
+		if(trim(str_replace("\n","",$value)) != ""){
+			echo $value;   
+		}
+	}
+}
+
+function get_string_between($string, $start, $end){
+	$string = '' . $string;
+	$ini = strpos($string, $start);
+	if ($ini == 0) return '';
+	$ini += strlen($start);
+	$len = strpos($string, $end, $ini) - $ini;
+	return substr($string, $ini, $len);
+	}
+
+
+
 ?>
 
 <html>
@@ -44,15 +75,7 @@ if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
                                 <input type='submit' name='logout' value='Logout'>
                             </form>
                             <label class="switch" id="switchjs">
-                                <input type="checkbox" id="myCheck" onclick="setTimeout(mapChange,500)" value="unchecked" 
-                                <?php 
-                                if($_GET['isChecked'] == 'true'){
-                                    echo "checked";
-                                    }
-                                elseif($_GET['isChecked'] == 'false'){
-                                    echo "";
-                                    }
-                                ?> >
+                                <input type="checkbox" id="myCheck" onclick="setTimeout(mapChange,500)" value="unchecked" >
                                     <div class="slider" id="sliderjs">
                                     </div>
                             </label>
@@ -69,43 +92,20 @@ if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
                         </script>
                     </div>
                     <div id="mapinfo">
+	<?php //echo file_get_contents("http://127.0.0.1/study/2.2/legacywebsite/getdata.php?stationID=10590"); ?>
                     </div>
                     <div id="hiddenData">
-                        <?php $lines = file('data.csv'); $data = array();
-                            foreach($lines as $line) {
-                            if (empty($line)) 
-                                continue;
-                                $lineArr = explode(',', $line);
-                                foreach($lineArr as $value){
-                                echo $value;}
-                            } ?>
+						<?php listData('data.csv') ?>
                     </div>
                     <div id="hiddenDataStations">
-                    <?php
-                    function get_string_between($string, $start, $end){
-                        $string = '' . $string;
-                        $ini = strpos($string, $start);
-                        if ($ini == 0) return '';
-                        $ini += strlen($start);
-                        $len = strpos($string, $end, $ini) - $ini;
-                        return substr($string, $ini, $len);
-                        }
-
-                        $lines = file("stations.txt");;
-                        foreach ($lines as $value) {
-                            if(trim(str_replace("\n","",$value)) != ""){
-                                echo $value;   
-                            }
-                        } ?>
+                    <?php listStations('stations.txt') ?>
                     </div>
                 </div>
                 <div class="footer">
                     <div id="bar"></div>
                     <div id="inner">
                         <div id="logo">
-                            <a href="http://www.ui.ac.id/">
-                                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/da/Universitas_Indonesia_logo.svg/1280px-Universitas_Indonesia_logo.svg.png" alt="logo">
-                            </a>
+                            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/da/Universitas_Indonesia_logo.svg/1280px-Universitas_Indonesia_logo.svg.png" alt="logo">
                         </div>
                     </div>
                 </div>
