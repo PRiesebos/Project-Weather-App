@@ -103,7 +103,9 @@ if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
                     <div id="bar"></div>
                     <div id="inner">
                         <div id="logo">
-                            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/da/Universitas_Indonesia_logo.svg/1280px-Universitas_Indonesia_logo.svg.png" alt="logo">
+                            <a href="http://www.ui.ac.id/">
+                                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/da/Universitas_Indonesia_logo.svg/1280px-Universitas_Indonesia_logo.svg.png" alt="logo">
+                            </a>
                         </div>
                     </div>
                 </div>
