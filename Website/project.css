@@ -22,7 +22,6 @@ body p {
 
 .wrapper-home {
     resize: both;
-    /* height: -webkit-fill-available; */
     height: auto;
     width: auto;
 }
@@ -531,9 +530,11 @@ input:checked+.slider:after {
 div #hiddenData {
     visibility: hidden;
     height: 0px;
+    display: none;
 }
 
 div #hiddenDataStations {
     visibility: hidden;
     height: 0px;
+    display: none;
 }
