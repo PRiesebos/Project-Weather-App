@@ -117,7 +117,7 @@ function post(path, params, method) {
 
 function initMap() {
     if ((sessionStorage.getItem("mapType") == "Temp") || (sessionStorage.getItem("mapType") === null)) {
-        var centerindi = { lat: 1.75292, lng: 107.358398 };
+        var centerindi = { lat: 6.107784, lng: 119.003906 };
         var map = new google.maps.Map(document.getElementById('mapdiv'), {
             zoom: 5,
             mapTypeControl: false,
@@ -195,13 +195,8 @@ function initMap() {
             }
         }
     } else if (sessionStorage.getItem("mapType") == "Wind") {
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 31dbe4fd8f02c7af09720cb6fb294aa71106b06b
         var uni2 = { lat: -6.3627638, lng: 106.8248595 };
-        var centerindi2 = { lat: 1.75292, lng: 107.358398 };
+        var centerindi2 = { lat: 6.107784, lng: 119.003906 };
         var map2 = new google.maps.Map(document.getElementById('mapdiv'), {
             zoom: 5,
             mapTypeControl: false,
