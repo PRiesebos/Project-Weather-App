@@ -170,11 +170,13 @@ function initMap() {
             StationArray.push(WordArray);
 
             var marker, i;
-
+            
             for (i = 0; i < StationArray.length; i++) {
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(parseFloat(StationArray[i][3]), parseFloat(StationArray[i][4])),
+                    icon: 'stat.png',
                     map: map
+                    
                 });
 
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -193,6 +195,11 @@ function initMap() {
             }
         }
     } else if (sessionStorage.getItem("mapType") == "Wind") {
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 31dbe4fd8f02c7af09720cb6fb294aa71106b06b
         var uni2 = { lat: -6.3627638, lng: 106.8248595 };
         var centerindi2 = { lat: 1.75292, lng: 107.358398 };
         var map2 = new google.maps.Map(document.getElementById('mapdiv'), {

@@ -44,6 +44,7 @@ if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
                                 <input type='submit' name='logout' value='Logout'>
                             </form>
                             <label class="switch" id="switchjs">
+<<<<<<< HEAD
                                 <input type="checkbox" id="myCheck" onclick="setTimeout(mapChange,500)" value="unchecked" 
                                 <?php 
                                 if($_GET['isChecked'] == 'true'){
@@ -53,6 +54,9 @@ if(isset($_POST['logout']) || (!isset($_SESSION['email'])))
                                     echo "";
                                     }
                                 ?> >
+=======
+                                <input type="checkbox" id="myCheck" onclick="setTimeout(mapChange,500)" value="unchecked" >
+>>>>>>> 31dbe4fd8f02c7af09720cb6fb294aa71106b06b
                                     <div class="slider" id="sliderjs">
                                     </div>
                             </label>
