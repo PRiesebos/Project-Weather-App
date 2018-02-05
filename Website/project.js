@@ -129,7 +129,7 @@ function initMap() {
             center: centerindi,
             mapTypeId: 'hybrid'
         });
-        map.setOptions({ minZoom: 5, maxZoom: 5 });
+        map.setOptions({ minZoom: 4, maxZoom: 9 });
         var contentString = '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
@@ -208,7 +208,7 @@ function initMap() {
             center: centerindi2,
             mapTypeId: 'hybrid'
         });
-        map2.setOptions({ minZoom: 5, maxZoom: 5 });
+        map2.setOptions({ minZoom: 4, maxZoom: 9 });
         var contentString2 = '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
