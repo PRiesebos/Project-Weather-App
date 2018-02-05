@@ -22,7 +22,8 @@ body p {
 
 .wrapper-home {
     resize: both;
-    height: -webkit-fill-available;
+    /* height: -webkit-fill-available; */
+    height: auto;
     width: auto;
 }
 

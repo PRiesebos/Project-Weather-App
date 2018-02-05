@@ -80,18 +80,16 @@ $(window).bind('resizeEnd', function() {
 //function for toggle switch Temperature/wind
 
 function mapChange() {
-    if ((sessionStorage.getItem("mapType") == "Temp") && (document.getElementById("myCheck").value == "unchecked")) {
-        sessionStorage.setItem("mapType", "Wind");
-        location.reload();
-    } else if ((sessionStorage.getItem("mapType") === null) || (sessionStorage.getItem("mapType") == "Wind")) {
+    if ((sessionStorage.getItem("mapType") == "Wind") && (document.getElementById("myCheck").value == "unchecked")) {
         sessionStorage.setItem("mapType", "Temp");
-        var myVar = "";
-        location.reload();
+        post('index.php', { isChecked: 'false' }, 'get');
+    } else if ((sessionStorage.getItem("mapType") === null) || (sessionStorage.getItem("mapType") == "Temp")) {
+        sessionStorage.setItem("mapType", "Wind");
+        post('index.php', { isChecked: 'true' }, 'get');
     }
 }
 
 //google maps
-var infowindow;
 
 function post(path, params, method) {
     method = method || "post"; // Set method to post by default if not specified.
@@ -102,8 +100,8 @@ function post(path, params, method) {
     form.setAttribute("method", method);
     form.setAttribute("action", path);
 
-    for(var key in params) {
-        if(params.hasOwnProperty(key)) {
+    for (var key in params) {
+        if (params.hasOwnProperty(key)) {
             var hiddenField = document.createElement("input");
             hiddenField.setAttribute("type", "hidden");
             hiddenField.setAttribute("name", key);
@@ -118,9 +116,7 @@ function post(path, params, method) {
 }
 
 function initMap() {
-    
     if ((sessionStorage.getItem("mapType") == "Temp") || (sessionStorage.getItem("mapType") === null)) {
-        post('index.php', {isChecked : 'false'}, 'get');
         var centerindi = { lat: 1.75292, lng: 107.358398 };
         var map = new google.maps.Map(document.getElementById('mapdiv'), {
             zoom: 5,
@@ -189,22 +185,14 @@ function initMap() {
                         infowindow.setContent(StatInfo);
                         infowindow.open(map, marker);
 
-                        post('http://localhost/ProjectWeather/query.php',{stn: "" + StationArray[i][0]}, 'get');
-                        
+                        post('http://localhost/ProjectWeather/query.php', { stn: "" + StationArray[i][0] }, 'get');
+
 
                     };
                 })(marker, i));
             }
         }
-
-        google.maps.event.addDomListener(document.getElementById('mapdiv'), 'click', function() {
-            //infowindow.close();
-            //var mapinfo = document.getElementById('mapinfo');
-            //mapinfo.removeChild(mapinfo.childNodes[0]);
-        });
     } else if (sessionStorage.getItem("mapType") == "Wind") {
-        post('index.php', {isChecked : 'true'}, 'get');
-
         var uni2 = { lat: -6.3627638, lng: 106.8248595 };
         var centerindi2 = { lat: 1.75292, lng: 107.358398 };
         var map2 = new google.maps.Map(document.getElementById('mapdiv'), {
